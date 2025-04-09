@@ -1,0 +1,12 @@
+body {
+	direction: ltr;
+    background-image: url("images/Logo.webp"); 
+	font-family: "chiller", serif;
+	background-size: cover; 
+	background-position: center; 
+	background-attachment: fixed; 
+    color: white;    
+  }
+  h1{
+    font-size: 80;
+  }

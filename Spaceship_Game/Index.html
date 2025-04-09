@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Battle</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1 style="text-align: center;">Space Battle</h1>
+    <img src="images/background.jpeg" alt="Logo" height="50" >
+  </header>
+
+  <!-- Menu -->
+  <nav style="text-align: center;">
+    <button onclick="showScreen('welcome')"> Home Page</button>
+    <button onclick="showScreen('login')">Log in</button>
+    <button onclick="showScreen('register')">Sing in</button>
+    <button onclick="openAbout()">About</button>
+  </nav>
+
+  <!-- Screens -->
+  <main>
+    <!-- Welcome Screen -->
+    <div id="welcome" class="screen">
+      <h2>  Welcom -Space Battle</h2>
+      <p></p>
+      <a href="https://your-portfolio.com" target="_blank">Our Website</a>
+      <div>
+        <button onclick="showScreen('register')">Sing in</button>
+        <button onclick="showScreen('login')">Log in</button>
+      </div>
+    </div>
+
+    <!-- Register Screen -->
+    <div id="register" class="screen" style="display:none">
+      <h2>הרשמה</h2>
+      <form onsubmit="return registerUser(event)">
+        <input type="text" placeholder="שם משתמש" id="reg-username" required><br>
+        <input type="password" placeholder="סיסמה" id="reg-password" required><br>
+        <input type="password" placeholder="אימות סיסמה" id="reg-confirm" required><br>
+        <input type="text" placeholder="שם פרטי" id="reg-fname" required><br>
+        <input type="text" placeholder="שם משפחה" id="reg-lname" required><br>
+        <input type="email" placeholder="אימייל" id="reg-email" required><br>
+        <label>תאריך לידה:</label>
+        <select id="reg-day"></select>
+        <select id="reg-month"></select>
+        <select id="reg-year"></select><br>
+        <button type="submit">הירשם</button>
+      </form>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login" class="screen" style="display:none">
+      <h2>התחברות</h2>
+      <form onsubmit="return loginUser(event)">
+        <input type="text" placeholder="שם משתמש" id="login-username" required><br>
+        <input type="password" placeholder="סיסמה" id="login-password" required><br>
+        <button type="submit">התחבר</button>
+      </form>
+    </div>
+
+    <!-- Configuration Screen -->
+    <div id="config" class="screen" style="display:none">
+      <h2>הגדרות משחק</h2>
+      <label>בחר מקש לירי:</label>
+      <input type="text" id="shoot-key" maxlength="1" required><br>
+      <label>משך המשחק (דקות):</label>
+      <input type="number" id="game-time" min="2" value="2"><br>
+      <button onclick="startGame()">התחל משחק</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game" class="screen" style="display:none">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+      <div id="hud">
+        <span id="score">נקודות: 0</span>
+        <span id="lives">פסילות: 3</span>
+        <span id="timer">זמן: 00:00</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>כל הזכויות שמורות | Space Battle 2025</p>
+    <p>צור קשר: yehonatan@example.com</p>
+  </footer>
+
+  <!-- About Modal -->
+  <div id="aboutModal" class="modal" style="display:none">
+    <div class="modal-content">
+      <span class="close" onclick="closeAbout()">&times;</span>
+      <h2>אודות</h2>
+      <p>הגישו: יהונתן ועוד.</p>
+      <p>נעשה שימוש ב־template אישי, jQuery, תוספים נוספים לפי הצורך.</p>
+      <p>קשיים: תיאום תנועה, שמירת תוצאות, ניהול מצבים.</p>
+    </div>
+  </div>
+</body>
+</html>
