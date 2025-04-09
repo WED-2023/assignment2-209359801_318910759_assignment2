@@ -1,12 +1,31 @@
 body {
 	direction: ltr;
-    background-image: url("images/Logo.webp"); 
-	font-family: "chiller", serif;
+    background-image: url("images/background.jpeg"); 
+	font-family: "ink free", serif;
 	background-size: cover; 
 	background-position: center; 
 	background-attachment: fixed; 
     color: white;    
   }
   h1{
-    font-size: 80;
+    font-size: 80px;
+
   }
+  .image {
+    width: 600px; 
+    height: auto; 
+	border: 5px solid white;
+	margin: 10px;
+}
+.box-size{
+    font-family:"ink free", serif;
+    width: 100%;
+    max-width: 300px;
+    height: 40px;
+    padding: 5px;
+    font-size: 30px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-sizing: border-box;
+	background-color: lightblue;  
+}

@@ -9,17 +9,17 @@
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <h1 style="text-align: center;">Space Battle</h1>
-    <img src="images/background.jpeg" alt="Logo" height="50" >
+  <header style="text-align: center;">
+    <h1 style=>Space Battle</h1>
+    <img src="images/Logo.webp" alt="Logo" height="50" class="image" >
   </header>
 
   <!-- Menu -->
-  <nav style="text-align: center;">
-    <button onclick="showScreen('welcome')"> Home Page</button>
-    <button onclick="showScreen('login')">Log in</button>
-    <button onclick="showScreen('register')">Sing in</button>
-    <button onclick="openAbout()">About</button>
+  <nav style="text-align: center;" >
+    <button onclick="showScreen('welcome')"class="box-size"> Home Page</button>
+    <button onclick="showScreen('login')" class="box-size">Log in</button>
+    <button onclick="showScreen('register')" class="box-size">Sing in</button>
+    <button onclick="openAbout()" class="box-size">About</button>
   </nav>
 
   <!-- Screens -->
@@ -37,7 +37,7 @@
 
     <!-- Register Screen -->
     <div id="register" class="screen" style="display:none">
-      <h2>הרשמה</h2>
+      <h2>Sing in</h2>
       <form onsubmit="return registerUser(event)">
         <input type="text" placeholder="שם משתמש" id="reg-username" required><br>
         <input type="password" placeholder="סיסמה" id="reg-password" required><br>
@@ -49,13 +49,13 @@
         <select id="reg-day"></select>
         <select id="reg-month"></select>
         <select id="reg-year"></select><br>
-        <button type="submit">הירשם</button>
+        <button type="submit">Sing in</button>
       </form>
     </div>
 
     <!-- Login Screen -->
     <div id="login" class="screen" style="display:none">
-      <h2>התחברות</h2>
+      <h2>Log in</h2>
       <form onsubmit="return loginUser(event)">
         <input type="text" placeholder="שם משתמש" id="login-username" required><br>
         <input type="password" placeholder="סיסמה" id="login-password" required><br>
