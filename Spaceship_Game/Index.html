@@ -11,6 +11,7 @@
 </head>
 <body>
 
+  <!--header Welcome-->
   <header>
     <div id="welcome" class="screen">
       <h2>Welcome - Space Shooter</h2>
@@ -39,14 +40,15 @@
   <main>
 
     </div>
-
+    
+    <!--Register new User-->
     <div id="register" class="screen" style="display:none">
       <h2>Register</h2>
       
       <form onsubmit="return registerUser(event)">
         <input type="text" placeholder="Username" id="reg-username" required><br>
-        <input type="password" placeholder="Password" id="reg-password" required minlength="8"><br>
-        <input type="password" placeholder="Confirm Password" id="reg-confirm" required minlength="8"><br>
+        <input type="password" placeholder="Password" id="reg-password" required minlength="2"><br>
+        <input type="password" placeholder="Confirm Password" id="reg-confirm" required minlength="2"><br>
         <input type="text" placeholder="First Name" id="reg-fname" required><br>
         <input type="text" placeholder="Last Name" id="reg-lname" required><br>
         <input type="email" placeholder="Email" id="reg-email" required><br>
@@ -58,6 +60,7 @@
       </form>
     </div>
 
+    <!--Log in User-->
     <div id="login" class="screen" style="display:none">
       <h2>Login</h2>
       <form onsubmit="return loginUser(event)">
@@ -67,7 +70,18 @@
       </form>
     </div>
 
+    <!--Need to do About !!!!!!!!!!!!!!!!!!!!-->
+
+    <!-- Configuration Screen -->
+    <div id="conf" class="screen" style="display:none">
+      <canvas id="gameConf" width="800" height="600"></canvas>
+      <form onsubmit="return pick_shoot(event)">
+        <input type="text" placeholder="Pick a key to Shoot" id="shoot" required><br>
+      </form>
+    </div>
+
   </main>
+
 
   <footer>
     <p>All rights reserved | Space Shooter 2025</p>

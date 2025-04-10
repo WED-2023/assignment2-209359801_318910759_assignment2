@@ -29,7 +29,7 @@ function showScreen(screen_id){
     }
 }
 
-let users_array = [{'p':'testUser'}]
+let users_array = [{'p':'p'}]
 // Check the Register
 function registerUser(event){
     event.preventDefault();
@@ -69,7 +69,7 @@ function registerUser(event){
     if (found) {
         alert('Login Success!');
         // Need to change to the play screen
-        showScreen('welcome');
+        showScreen('conf');
     } else {
         alert('Username or Password incorrect!');
     }
