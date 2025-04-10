@@ -3,13 +3,11 @@ body {
   padding: 0;
   font-family: 'Arial', sans-serif;
   background: url('images/back_photo.png') no-repeat center center fixed;
-  background-size: cover; /* Fill all the screen */
+  background-size: 110%;
   background-repeat: no-repeat;
   background-color: black;
   color: white;
 }
-
-
 
 header {
   text-align: center;
@@ -43,9 +41,10 @@ button:hover {
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100vh;
   text-align: center;
+  margin-top: 30px; /* Reduce distance from nav */
 }
 
 #welcome {
@@ -66,6 +65,8 @@ button:hover {
   font-size: 50px;
   color: #00ffff;
   text-shadow: 0 0 15px #00ffff;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #welcome a {
@@ -85,4 +86,54 @@ footer {
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.7);
   position: relative;
+}
+
+#register, #login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#register form, #login form {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+#register h2, #login h2 {
+  font-size: 50px;
+  color: #00ffff;
+  text-shadow: 0 0 15px #00ffff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#register input, #login input {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+#register button, #login button {
+  background-color: #222;
+  color: white;
+  border: 2px solid #00ffff;
+  padding: 10px 30px;
+  font-size: 18px;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+#register button:hover, #login button:hover {
+  background-color: #00ffff;
+  color: black;
 }

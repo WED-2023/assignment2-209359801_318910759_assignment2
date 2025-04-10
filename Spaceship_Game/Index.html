@@ -34,6 +34,7 @@
 
     <div id="register" class="screen" style="display:none">
       <h2>Register</h2>
+      
       <form onsubmit="return registerUser(event)">
         <input type="text" placeholder="Username" id="reg-username" required><br>
         <input type="password" placeholder="Password" id="reg-password" required><br>
@@ -73,20 +74,26 @@
     </div>
   </div>
 
-  # Change the screens
+  # Change the screens of the menu
   <script>
     function showScreen(screen_id){
-      const screen = document.querySelectorAll('.screen');
-      screens.forEach(screen => {
-        screen.style.display = 'none';
-    });
-
-    const selectedScreen = document.getElementById(screen_id);
-    if (selectedScreen) {
-        selectedScreen.style.display = 'flex';
-    }
+        const screens = document.querySelectorAll('.screen'); // correct variable name
+        screens.forEach(screen => {
+            screen.style.display = 'none';
+        });
+    
+        const selectedScreen = document.getElementById(screen_id);
+        if (selectedScreen) {
+            selectedScreen.style.display = 'flex';
+        }
     }
   </script>
+
+  # Check the Register
+  <script>
+
+  </script>
+    
 
 </body>
 </html>
