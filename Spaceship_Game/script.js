@@ -80,69 +80,6 @@ function registerUser(event){
     }
 }
 
-
-let shoot = " ";
-let game_time = 2;
-let color = "";
-const heroImage = new Image()
-let enemyImage = []
-let score = 0
-
-// Check User game Setting
-function conf1(event) {
-    event.preventDefault();
-
-    shoot = document.getElementById('shoot').value;
-    game_time = document.getElementById('gameTime').value;
-
-    if (shoot === "") {
-        alert("You must select a shooting key!");
-        return false;
-    }
-
-    if (color === "") {
-        alert("You must select an Aircraft!");
-        return false;
-    }
-
-    else if (color === "orange"){
-        heroImage.src = "images\H_Aircrafts\hero_orange_AirCraft.png"
-    }
-
-    else if(color === "green"){
-        heroImage.src = "images\H_Aircrafts\hero_green_AirCraft.png"
-    }
-
-    else if(color === "blue"){
-        heroImage.src = "images\H_Aircrafts\hero_blue_AirCraft.png"
-    }
-
-    else{
-        heroImage.src = "images\H_Aircrafts\hero_purple_AirCraft.png"
-    }
-
-
-    for (let i = 0; i < 4; i++){
-        enemyImage[i] = []
-        for (let j = 0; j < 5 ; j++){
-            enemyImage[i][j] = new Image();
-            if(i == 0){
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_purple_AirCraft.png"
-            }
-            else if(i == 1){
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_red_AirCraft.png"
-            }
-            else if(i == 2){
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_blue_AirCraft.png"
-            }
-            else{
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_green_AirCraft.png"
-            }
-        }
-    }
-    startGame();
-}
-
 function setShootKey(event) {
     const shootInput = document.getElementById('shoot');
     shootInput.value = event.key;
@@ -178,3 +115,126 @@ function initConfiguration() {
 }
 
 initConfiguration();
+
+let shoot = " ";
+let game_time = 2;
+let color = "";
+const heroImage = new Image()
+let enemyImage = []
+let score = 0
+
+// Check User game Setting
+function conf1(event) {
+    event.preventDefault();
+
+    shoot = document.getElementById('shoot').value;
+    game_time = document.getElementById('gameTime').value;
+
+    if (shoot === "") {
+        alert("You must select a shooting key!");
+        return false;
+    }
+
+    if (color === "") {
+        alert("You must select an Aircraft!");
+        return false;
+    }
+    init_AirCraft_Images(color);
+    startGame();
+}
+
+// Init the images to the AirCraft
+function init_AirCraft_Images(color){
+    heroImage.src = `images/H_Aircrafts/hero_${color}_AirCraft.png`;
+
+    for (let i = 0; i < 4; i++){
+        enemyImage[i] = []
+        for (let j = 0; j < 5 ; j++){
+            enemyImage[i][j] = new Image();
+            if(i == 0){
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_purple_AirCraft.png"
+            }
+            else if(i == 1){
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_red_AirCraft.png"
+            }
+            else if(i == 2){
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_blue_AirCraft.png"
+            }
+            else{
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_green_AirCraft.png"
+            }
+        }
+    }
+}
+
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let bgY = 0;
+let bgSpeed = 1; // background speed
+
+
+
+const hero = {x : canvas.width / 2 - heroImage.width / 2 - 50, y : canvas.height * 0.8, width : 50, height : 50, speed : 5};
+const keys = {};
+document.addEventListener("keydown", e => {keys[e.key] = true});
+document.addEventListener("keyup", e => {keys[e.key] = false});
+
+
+function update(){
+    if(keys["ArrowUp"]) hero.y -= hero.speed;
+    if(keys["ArrowDown"]) hero.y += hero.speed;
+    if(keys["ArrowLeft"]) hero.x -= hero.speed;
+    if(keys["ArrowRight"]) hero.x += hero.speed;
+
+    // TODO: add collision detection between hero_shoot to enemy 
+
+    // TODO: add collision detection between enemy_shoot to hero
+    
+    // TODO: limit hero movment into 40% of the canvas
+}
+
+
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawBackground();
+
+    drawHero();
+}
+
+function drawHero() {
+    ctx.drawImage(heroImage, hero.x, hero.y, 100, 100);
+}
+
+
+const bgImage = new Image();
+bgImage.src = "images/game_star.png";
+function drawBackground() {
+    bgY += bgSpeed;
+
+    if (bgY >= canvas.height) {
+        bgY = 0;
+    }
+
+    ctx.drawImage(bgImage, 0, bgY, canvas.width, canvas.height);
+    ctx.drawImage(bgImage, 0, bgY - canvas.height, canvas.width, canvas.height);
+}
+
+
+
+function startGame() {
+    const menuMusic = document.getElementById('menu-music');
+    menuMusic.pause();
+    menuMusic.currentTime = 0;
+
+    showScreen('game');
+
+    gameLoop();
+}

@@ -1,3 +1,10 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+
 body {
   margin: 0;
   padding: 0;
@@ -198,4 +205,9 @@ dialog {
 
 .color-option:hover {
   border: 2px solid #333;
+}
+
+#gameCanvas {
+  display: block;
+  margin: 0 auto;
 }
