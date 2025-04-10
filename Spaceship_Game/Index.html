@@ -9,8 +9,9 @@
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
-<body>
 
+
+<body>
   <!--header Welcome-->
   <header>
     <div id="welcome" class="screen">
@@ -72,14 +73,13 @@
 
     <!--Need to do About !!!!!!!!!!!!!!!!!!!!-->
 
-    <dialog id="aboutDialog" class="screen" style="display:none">
-      <span class="close-btn" id="closeBtn">X</span>
+    <dialog id="aboutDialog" class="screen">
       <h2>About Us</h2>
       <p> The Creators: Yehonatan Segal and Omer Onn</p>
+      <button onclick="closeAbout()" class="close-btn">X</button>
     </dialog>
+
     
-
-
     <!-- Configuration Screen -->
     <div id="conf" class="screen" style="display:none">
       <canvas id="gameConf" width="800" height="600"></canvas>
@@ -93,8 +93,7 @@
 
   <footer>
     <p>All rights reserved | Space Shooter 2025</p>
-    <p>Contact: yehonatan@example.com</p>
-    <p>Created by Yehonatan and Omer and ChatGPT.</p>
+    <p>Created by Yehonatan and Omer.</p>
   </footer>
 
   <div id="aboutModal" class="modal" style="display:none">
