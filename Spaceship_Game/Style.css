@@ -1,12 +1,88 @@
 body {
-	direction: ltr;
-    background-image: url("images/Logo.webp"); 
-	font-family: "chiller", serif;
-	background-size: cover; 
-	background-position: center; 
-	background-attachment: fixed; 
-    color: white;    
-  }
-  h1{
-    font-size: 80;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('images/back_photo.png') no-repeat center center fixed;
+  background-size: cover; /* Fill all the screen */
+  background-repeat: no-repeat;
+  background-color: black;
+  color: white;
+}
+
+
+
+header {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+nav {
+  text-align: center;
+  margin: 20px 0;
+}
+
+button {
+  background-color: #222;
+  color: white;
+  border: 2px solid #00ffff;
+  padding: 10px 30px;
+  font-size: 18px;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+button:hover {
+  background-color: #00ffff;
+  color: black;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+#welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0 10px;
+}
+
+#welcome h2 {
+  font-size: 50px;
+  color: #00ffff;
+  text-shadow: 0 0 15px #00ffff;
+}
+
+#welcome a {
+  color: #ffcc00;
+  font-size: 20px;
+  text-decoration: none;
+  margin: 20px 0;
+  transition: 0.3s;
+}
+
+#welcome a:hover {
+  color: #ff6600;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: relative;
+}

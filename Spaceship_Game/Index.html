@@ -8,97 +8,85 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Header -->
+
   <header>
-    <h1 style="text-align: center;">Space Battle</h1>
-    <img src="images/background.jpeg" alt="Logo" height="50" >
+    <h1>Space Battle</h1>
+    <img src="images/logo_photo.png" alt="Logo" height="50">
   </header>
 
-  <!-- Menu -->
-  <nav style="text-align: center;">
-    <button onclick="showScreen('welcome')"> Home Page</button>
+  <nav>
+    <button onclick="showScreen('welcome')">Home Page</button>
     <button onclick="showScreen('login')">Log in</button>
-    <button onclick="showScreen('register')">Sing in</button>
+    <button onclick="showScreen('register')">Sign in</button>
     <button onclick="openAbout()">About</button>
   </nav>
 
-  <!-- Screens -->
   <main>
-    <!-- Welcome Screen -->
+
     <div id="welcome" class="screen">
-      <h2>  Welcom -Space Battle</h2>
-      <p></p>
+      <h2>Welcome - Space Battle</h2>
       <a href="https://your-portfolio.com" target="_blank">Our Website</a>
       <div>
-        <button onclick="showScreen('register')">Sing in</button>
+        <button onclick="showScreen('register')">Sign in</button>
         <button onclick="showScreen('login')">Log in</button>
       </div>
     </div>
 
-    <!-- Register Screen -->
     <div id="register" class="screen" style="display:none">
-      <h2>הרשמה</h2>
+      <h2>Register</h2>
       <form onsubmit="return registerUser(event)">
-        <input type="text" placeholder="שם משתמש" id="reg-username" required><br>
-        <input type="password" placeholder="סיסמה" id="reg-password" required><br>
-        <input type="password" placeholder="אימות סיסמה" id="reg-confirm" required><br>
-        <input type="text" placeholder="שם פרטי" id="reg-fname" required><br>
-        <input type="text" placeholder="שם משפחה" id="reg-lname" required><br>
-        <input type="email" placeholder="אימייל" id="reg-email" required><br>
-        <label>תאריך לידה:</label>
+        <input type="text" placeholder="Username" id="reg-username" required><br>
+        <input type="password" placeholder="Password" id="reg-password" required><br>
+        <input type="password" placeholder="Confirm Password" id="reg-confirm" required><br>
+        <input type="text" placeholder="First Name" id="reg-fname" required><br>
+        <input type="text" placeholder="Last Name" id="reg-lname" required><br>
+        <input type="email" placeholder="Email" id="reg-email" required><br>
+        <label>Date of Birth:</label>
         <select id="reg-day"></select>
         <select id="reg-month"></select>
         <select id="reg-year"></select><br>
-        <button type="submit">הירשם</button>
+        <button type="submit">Register</button>
       </form>
     </div>
 
-    <!-- Login Screen -->
     <div id="login" class="screen" style="display:none">
-      <h2>התחברות</h2>
+      <h2>Login</h2>
       <form onsubmit="return loginUser(event)">
-        <input type="text" placeholder="שם משתמש" id="login-username" required><br>
-        <input type="password" placeholder="סיסמה" id="login-password" required><br>
-        <button type="submit">התחבר</button>
+        <input type="text" placeholder="Username" id="login-username" required><br>
+        <input type="password" placeholder="Password" id="login-password" required><br>
+        <button type="submit">Login</button>
       </form>
     </div>
 
-    <!-- Configuration Screen -->
-    <div id="config" class="screen" style="display:none">
-      <h2>הגדרות משחק</h2>
-      <label>בחר מקש לירי:</label>
-      <input type="text" id="shoot-key" maxlength="1" required><br>
-      <label>משך המשחק (דקות):</label>
-      <input type="number" id="game-time" min="2" value="2"><br>
-      <button onclick="startGame()">התחל משחק</button>
-    </div>
-
-    <!-- Game Screen -->
-    <div id="game" class="screen" style="display:none">
-      <canvas id="gameCanvas" width="800" height="600"></canvas>
-      <div id="hud">
-        <span id="score">נקודות: 0</span>
-        <span id="lives">פסילות: 3</span>
-        <span id="timer">זמן: 00:00</span>
-      </div>
-    </div>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <p>כל הזכויות שמורות | Space Battle 2025</p>
-    <p>צור קשר: yehonatan@example.com</p>
+    <p>All rights reserved | Space Battle 2025</p>
+    <p>Contact: yehonatan@example.com</p>
   </footer>
 
-  <!-- About Modal -->
   <div id="aboutModal" class="modal" style="display:none">
     <div class="modal-content">
       <span class="close" onclick="closeAbout()">&times;</span>
-      <h2>אודות</h2>
-      <p>הגישו: יהונתן ועוד.</p>
-      <p>נעשה שימוש ב־template אישי, jQuery, תוספים נוספים לפי הצורך.</p>
-      <p>קשיים: תיאום תנועה, שמירת תוצאות, ניהול מצבים.</p>
+      <h2>About</h2>
+      <p>Created by Yehonatan and team.</p>
     </div>
   </div>
+
+  # Change the screens
+  <script>
+    function showScreen(screen_id){
+      const screen = document.querySelectorAll('.screen');
+      screens.forEach(screen => {
+        screen.style.display = 'none';
+    });
+
+    const selectedScreen = document.getElementById(screen_id);
+    if (selectedScreen) {
+        selectedScreen.style.display = 'flex';
+    }
+    }
+  </script>
+
 </body>
 </html>
