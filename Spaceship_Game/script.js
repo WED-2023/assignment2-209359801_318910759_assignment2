@@ -163,16 +163,16 @@ function init_enemy_AirCraft_Images(){
         for (let j = 0; j < 5 ; j++){
             enemyImage[i][j] = new Image();
             if(i === 0){
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_purple_AirCraft.png"
+                enemyImage[i][j].src = "images/E_Aircrafts/enemy_purple_AirCraft.png"
             }
             else if(i === 1){
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_red_AirCraft.png"
+                enemyImage[i][j].src = "images/E_Aircrafts/enemy_red_AirCraft.png"
             }
             else if(i === 2){
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_blue_AirCraft.png"
+                enemyImage[i][j].src = "images/E_Aircrafts/enemy_blue_AirCraft.png"
             }
             else{
-                enemyImage[i][j].src = "images\E_Aircrafts\enemy_green_AirCraft.png"
+                enemyImage[i][j].src = "images/E_Aircrafts/enemy_green_AirCraft.png"
             }
         }
     }
@@ -194,12 +194,12 @@ let bgSpeed = 1; // background speed
 
 
 
-const hero = {x : canvas.width / 2 - heroImage.width / 2 - 50, y : canvas.height * 0.8, width : 50, height : 50, speed : 5};
+const hero = {x : canvas.width / 2 - heroImage.width / 2 - 50, y : canvas.height * 0.8, width : 50, height : 50, speed : 7.5};
 const keys = {};
 document.addEventListener("keydown", e => {keys[e.key] = true});
 document.addEventListener("keyup", e => {keys[e.key] = false});
 
-
+// Update the game every 16 ms
 function update(){
     if(keys["ArrowUp"] && hero.y > canvas.height * 0.6) hero.y -= hero.speed;
     if(keys["ArrowDown"] && hero.y < canvas.height - 100) hero.y += hero.speed;
@@ -226,10 +226,28 @@ function draw() {
 
     drawBackground();
     drawHero();
+    drawEnemys()
 }
 
+// Draw the hero
 function drawHero() {
     ctx.drawImage(heroImage, hero.x, hero.y, 100, 100);
+}
+
+// Draw the enemys
+function drawEnemys(){
+    let enemySpacingX = canvas.width / 6;
+    let enemySpacingY = canvas.height / 8;
+
+    for(let i = 0; i < 4; i++){
+        for(let j = 0; j < 5; j++){
+            if(enemyImage[i][j].complete){
+                ctx.drawImage(enemyImage[i][j], (j+1) * enemySpacingX - 50, (i+1) * enemySpacingY - 50, 100, 100);
+            }else{
+                console.log("Image not loaded for enemy", i, j);
+            }
+        }
+    }
 }
 
 // Mooving the background
