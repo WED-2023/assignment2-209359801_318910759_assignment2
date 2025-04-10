@@ -74,3 +74,40 @@ function registerUser(event){
         alert('Username or Password incorrect!');
     }
 }
+
+function about(evet){
+    
+    const dialog = document.getElementById("aboutDialog");
+    const openBtn = document.getElementById("openAbout");
+    const closeBtn = document.getElementById("closeBtn");
+
+    
+    openBtn.addEventListener("click", () => {
+      dialog.showModal();
+    });
+
+    
+    closeBtn.addEventListener("click", () => {
+      dialog.close();
+    });
+
+    
+    dialog.addEventListener("click", (event) => {
+      const rect = dialog.getBoundingClientRect();
+      if (
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom
+      ) {
+        dialog.close();
+      }
+    });
+
+    
+    $(document).on("keydown", function (e) {
+      if (e.key === "Escape" && dialog.open) {
+        dialog.close();
+      }
+    });
+}

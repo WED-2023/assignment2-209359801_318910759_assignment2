@@ -30,7 +30,7 @@
         <br><br>
         <button onclick="showScreen('register')">Sign in</button>
         <button onclick="showScreen('login')">Log in</button>
-        <button onclick="openAbout()">About</button>
+        <button onclick="showScreen('aboutDialog')">About</button>
       </div>
   </header>
 
@@ -71,6 +71,14 @@
     </div>
 
     <!--Need to do About !!!!!!!!!!!!!!!!!!!!-->
+
+    <dialog id="aboutDialog" class="screen" style="display:none">
+      <span class="close-btn" id="closeBtn">X</span>
+      <h2>About Us</h2>
+      <p> The Creators: Yehonatan Segal and Omer Onn</p>
+    </dialog>
+    
+
 
     <!-- Configuration Screen -->
     <div id="conf" class="screen" style="display:none">
