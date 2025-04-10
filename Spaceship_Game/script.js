@@ -34,7 +34,7 @@ function showScreen(screen_id) {
 }
 
 
-let users_array = [{'p':'p'}]
+let users_array = [{'b':'b'}, {'נ':'נ'}]
 // Check the Register
 function registerUser(event){
     event.preventDefault();
@@ -84,6 +84,9 @@ function registerUser(event){
 let shoot = " ";
 let game_time = 2;
 let color = "";
+const heroImage = new Image()
+let enemyImage = []
+let score = 0
 
 // Check User game Setting
 function conf1(event) {
@@ -102,6 +105,41 @@ function conf1(event) {
         return false;
     }
 
+    else if (color === "orange"){
+        heroImage.src = "images\H_Aircrafts\hero_orange_AirCraft.png"
+    }
+
+    else if(color === "green"){
+        heroImage.src = "images\H_Aircrafts\hero_green_AirCraft.png"
+    }
+
+    else if(color === "blue"){
+        heroImage.src = "images\H_Aircrafts\hero_blue_AirCraft.png"
+    }
+
+    else{
+        heroImage.src = "images\H_Aircrafts\hero_purple_AirCraft.png"
+    }
+
+
+    for (let i = 0; i < 4; i++){
+        enemyImage[i] = []
+        for (let j = 0; j < 5 ; j++){
+            enemyImage[i][j] = new Image();
+            if(i == 0){
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_purple_AirCraft.png"
+            }
+            else if(i == 1){
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_red_AirCraft.png"
+            }
+            else if(i == 2){
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_blue_AirCraft.png"
+            }
+            else{
+                enemyImage[i][j].src = "images\E_Aircrafts\enemy_green_AirCraft.png"
+            }
+        }
+    }
     startGame();
 }
 
