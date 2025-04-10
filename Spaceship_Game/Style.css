@@ -19,13 +19,19 @@ nav {
   text-align: center;
   margin: 20px 0;
 }
+.image{
+  width: 400px; 
+  height: auto; 
+  border: 5px solid white;
+  margin: 10px;
+}
 
 button {
   background-color: #222;
   color: white;
   border: 2px solid #00ffff;
   padding: 10px 30px;
-  font-size: 18px;
+  font-size: 40px;
   margin: 10px;
   cursor: pointer;
   transition: 0.3s;
@@ -62,7 +68,7 @@ button:hover {
 }
 
 #welcome h2 {
-  font-size: 50px;
+  font-size: 100px;
   color: #00ffff;
   text-shadow: 0 0 15px #00ffff;
   margin-top: 20px;

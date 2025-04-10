@@ -1,4 +1,6 @@
+
 // Change the screens of the menu
+
 function showScreen(screen_id){
     const screens = document.querySelectorAll('.screen');
     screens.forEach(screen => {

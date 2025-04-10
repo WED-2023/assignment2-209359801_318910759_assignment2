@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="he">
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,26 +12,32 @@
 <body>
 
   <header>
-    <h1>Space Battle</h1>
-    <img src="images/logo_photo.png" alt="Logo" height="50">
+    <div id="welcome" class="screen">
+      <h2>Welcome - Space Shooter</h2>
+      <br><br>
+      <img src="images/logo_photo.png" alt="Logo" height="50" class="image">
+      <br><br>
+      <div>
+        <h3>
+          Omer Onn - 318910759 :
+          <a href="https://wed-2023.github.io/318910759/" target="_blank">Albert Enstain</a>
+        </h3>
+        <h3>
+          Yehonatan Segal - 209359801 :
+          <a href="https://wed-2023.github.io/209359801/" target="_blank">King Bumi </a>
+        </h3>
+        <br><br>
+        <button onclick="showScreen('register')">Sign in</button>
+        <button onclick="showScreen('login')">Log in</button>
+        <button onclick="openAbout()">About</button>
+      </div>
   </header>
 
-  <nav>
-    <button onclick="showScreen('welcome')">Home Page</button>
-    <button onclick="showScreen('login')">Log in</button>
-    <button onclick="showScreen('register')">Sign in</button>
-    <button onclick="openAbout()">About</button>
-  </nav>
+
+
 
   <main>
 
-    <div id="welcome" class="screen">
-      <h2>Welcome - Space Battle</h2>
-      <a href="https://your-portfolio.com" target="_blank">Our Website</a>
-      <div>
-        <button onclick="showScreen('register')">Sign in</button>
-        <button onclick="showScreen('login')">Log in</button>
-      </div>
     </div>
 
     <div id="register" class="screen" style="display:none">
@@ -62,15 +70,16 @@
   </main>
 
   <footer>
-    <p>All rights reserved | Space Battle 2025</p>
+    <p>All rights reserved | Space Shooter 2025</p>
     <p>Contact: yehonatan@example.com</p>
+    <p>Created by Yehonatan and Omer and ChatGPT.</p>
   </footer>
 
   <div id="aboutModal" class="modal" style="display:none">
     <div class="modal-content">
       <span class="close" onclick="closeAbout()">&times;</span>
       <h2>About</h2>
-      <p>Created by Yehonatan and team.</p>
+      <p>Created by Yehonatan and Omer.</p>
     </div>
   </div>
 
