@@ -206,3 +206,13 @@ dialog {
   width: 80vw;
   height: 90vh;
 }
+
+#scoreBoard {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  font-size: 35px;
+  font-family: Arial, sans-serif;
+  z-index: 10;
+}

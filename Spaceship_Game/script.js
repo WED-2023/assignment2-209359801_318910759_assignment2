@@ -124,8 +124,17 @@ initConfiguration();
 let shoot = " ";
 let game_time = 2;
 let color = "";
+let heroBullets = [];
+const shootImage = new Image();
 const heroImage = new Image();
 let enemyImage = [];
+
+let enemyStartX = 100;
+let enemyStartY = 50;
+let enemyDirX = 2;
+let enemyDirY = 1;
+let enemyChangeDirectionTimer = 0;
+
 let score = 0;
 
 // Check User game Setting
@@ -154,6 +163,7 @@ function conf1(event) {
 // Init the images to the hero AirCraft
 function init_hero_AirCraft_Images(color){
     heroImage.src = `images/H_Aircrafts/hero_${color}_AirCraft.png`;
+    shootImage.src = `images/Lasers/${color}_laser.png`;
 }
 
 // Init the images of the enemy AirCraft
@@ -205,13 +215,93 @@ function update(){
     if(keys["ArrowDown"] && hero.y < canvas.height - 100) hero.y += hero.speed;
     if(keys["ArrowLeft"] && hero.x > 0) hero.x -= hero.speed;
     if(keys["ArrowRight"] && hero.x < canvas.width - 100) hero.x += hero.speed;
+    
 
-    // TODO: add collision detection between hero_shoot to enemy 
+    // Mooving enemy
+    enemyStartX += enemyDirX;
+    enemyStartY += enemyDirY;
+
+    enemyChangeDirectionTimer++;
+    if (enemyChangeDirectionTimer > 120){  // changed every 2 secound
+        enemyChangeDirectionTimer = 0;
+        enemyDirX = Math.floor(Math.random() * 7) - 3;
+        enemyDirY = Math.floor(Math.random() * 3); 
+    }
+
+    if (enemyStartX < 0) {
+        enemyStartX = 0;
+        enemyDirX *= -1;
+    }
+    if (enemyStartX + 5 * (canvas.width / 6) > canvas.width) {
+        enemyStartX = canvas.width - 5 * (canvas.width / 6);
+        enemyDirX *= -1;
+    }
+    if (enemyStartY < 0) {
+        enemyStartY = 0;
+        enemyDirY *= -1;
+    }
+    if (enemyStartY > canvas.height * 0.12){
+        enemyStartY = canvas.height * 0.12;
+        enemyDirY *= -1;
+    }
+
+    if(keys[shoot]) shootBullet();
+    for(let i=0; i<heroBullets.length; i++){
+        heroBullets[i].y -= heroBullets[i].speed;
+    }
+
+    heroBullets = heroBullets.filter(bullet => bullet.y > 0);
+    
+
+    // Collision detection between hero_shoot to enemy
+    for (let i = 0; i < heroBullets.length; i++) {
+        const bullet = heroBullets[i];
+    
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 5; col++) {
+                const enemy = enemyImage[row][col];
+    
+                if (enemy !== null) {
+                    let enemyX = enemyStartX + col * (canvas.width / 6);
+                    let enemyY = enemyStartY + row * (canvas.height / 8);
+    
+                    if (bullet.x < enemyX + 100 &&
+                        bullet.x + bullet.width > enemyX &&
+                        bullet.y < enemyY + 100 &&
+                        bullet.y + bullet.height > enemyY) {
+    
+                        // Remove the enemy
+                        enemyImage[row][col] = null;
+    
+                        // Remove the bullet
+                        heroBullets.splice(i, 1);
+                        i--;
+                        score += ((5-row-1) * 5)
+                        document.getElementById('scoreBoard').innerText = 'Score: ' + score;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
 
     // TODO: add collision detection between enemy_shoot to hero
     
     // TODO: limit hero movment into 40% of the canvas
 }
+
+
+// Shoot the hero bullet and sound
+const heroShootSound = new Audio("audio/hero_shoot.wav");
+function shootBullet(){
+    if(heroBullets.length === 0 || heroBullets[heroBullets.length-1].y < hero.y - 100) { 
+        heroShootSound.currentTime = 0;
+        heroShootSound.play();
+        heroBullets.push({x: hero.x + 50 - 25, y: hero.y, width: 50, height: 60, speed: 13});
+    }
+}
+
 
 // Loop of the game
 function gameLoop() {
@@ -227,6 +317,9 @@ function draw() {
     drawBackground();
     drawHero();
     drawEnemys()
+
+    drawHeroBullets();
+
 }
 
 // Draw the hero
@@ -235,19 +328,26 @@ function drawHero() {
 }
 
 // Draw the enemys
-function drawEnemys(){
+function drawEnemys() {
     let enemySpacingX = canvas.width / 6;
     let enemySpacingY = canvas.height / 8;
 
-    for(let i = 0; i < 4; i++){
-        for(let j = 0; j < 5; j++){
-            if(enemyImage[i][j].complete){
-                ctx.drawImage(enemyImage[i][j], (j+1) * enemySpacingX - 50, (i+1) * enemySpacingY - 50, 100, 100);
-            }else{
-                console.log("Image not loaded for enemy", i, j);
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 5; j++) {
+            if (enemyImage[i][j] !== null && enemyImage[i][j].complete) {
+                ctx.drawImage(enemyImage[i][j], enemyStartX + j * enemySpacingX, enemyStartY + i * enemySpacingY, 100, 100);
             }
         }
     }
+}
+
+
+
+//Draw the Shooting
+function drawHeroBullets(){
+    heroBullets.forEach(bullet => {
+        ctx.drawImage(shootImage, bullet.x, bullet.y, bullet.width, bullet.height);
+    });
 }
 
 // Mooving the background
