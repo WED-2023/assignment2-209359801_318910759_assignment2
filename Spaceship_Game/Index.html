@@ -37,8 +37,8 @@
       
       <form onsubmit="return registerUser(event)">
         <input type="text" placeholder="Username" id="reg-username" required><br>
-        <input type="password" placeholder="Password" id="reg-password" required><br>
-        <input type="password" placeholder="Confirm Password" id="reg-confirm" required><br>
+        <input type="password" placeholder="Password" id="reg-password" required minlength="8"><br>
+        <input type="password" placeholder="Confirm Password" id="reg-confirm" required minlength="8"><br>
         <input type="text" placeholder="First Name" id="reg-fname" required><br>
         <input type="text" placeholder="Last Name" id="reg-lname" required><br>
         <input type="email" placeholder="Email" id="reg-email" required><br>
@@ -74,25 +74,6 @@
     </div>
   </div>
 
-  # Change the screens of the menu
-  <script>
-    function showScreen(screen_id){
-        const screens = document.querySelectorAll('.screen'); // correct variable name
-        screens.forEach(screen => {
-            screen.style.display = 'none';
-        });
-    
-        const selectedScreen = document.getElementById(screen_id);
-        if (selectedScreen) {
-            selectedScreen.style.display = 'flex';
-        }
-    }
-  </script>
-
-  # Check the Register
-  <script>
-
-  </script>
     
 
 </body>
