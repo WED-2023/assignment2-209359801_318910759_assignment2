@@ -11,6 +11,22 @@ function showScreen(screen_id){
     if (selectedScreen) {
         selectedScreen.style.display = 'flex';
     }
+
+    // Clear register fields
+    if (screen_id === 'register') {
+        document.getElementById('reg-username').value = '';
+        document.getElementById('reg-password').value = '';
+        document.getElementById('reg-confirm').value = '';
+        document.getElementById('reg-fname').value = '';
+        document.getElementById('reg-lname').value = '';
+        document.getElementById('reg-email').value = '';
+    }
+
+    // Clear login fields
+    if (screen_id === 'login') {
+        document.getElementById('login-username').value = '';
+        document.getElementById('login-password').value = '';
+    }
 }
 
 let users_array = [{'p':'testUser'}]
