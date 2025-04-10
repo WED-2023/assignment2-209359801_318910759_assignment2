@@ -193,10 +193,10 @@ document.addEventListener("keyup", e => {keys[e.key] = false});
 
 
 function update(){
-    if(keys["ArrowUp"]) hero.y -= hero.speed;
-    if(keys["ArrowDown"]) hero.y += hero.speed;
-    if(keys["ArrowLeft"]) hero.x -= hero.speed;
-    if(keys["ArrowRight"]) hero.x += hero.speed;
+    if(keys["ArrowUp"] && hero.y > canvas.height * 0.6) hero.y -= hero.speed;
+    if(keys["ArrowDown"] && hero.y < canvas.height - 100) hero.y += hero.speed;
+    if(keys["ArrowLeft"] && hero.x > 0) hero.x -= hero.speed;
+    if(keys["ArrowRight"] && hero.x < canvas.width - 100) hero.x += hero.speed;
 
     // TODO: add collision detection between hero_shoot to enemy 
 
