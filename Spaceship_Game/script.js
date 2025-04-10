@@ -13,7 +13,7 @@ function showScreen(screen_id){
     }
 }
 
-let users_array = [{'p':'testuser'}]
+let users_array = [{'p':'testUser'}]
 // Check the Register
 function registerUser(event){
     event.preventDefault();
@@ -27,8 +27,34 @@ function registerUser(event){
     }
 
     const user = document.getElementById('reg-username').value;
-    users_array.push({user:password})
+    users_array.push({[user]: password});
+
     alert('Register Success!');
 
     showScreen('login');
   }
+
+  // Check User Valid
+  function loginUser(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    let found = false;
+
+    for (let i = 0; i < users_array.length; i++) {
+        if (users_array[i][username] === password) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        alert('Login Success!');
+        // Need to change to the play screen
+        showScreen('welcome');
+    } else {
+        alert('Username or Password incorrect!');
+    }
+}
