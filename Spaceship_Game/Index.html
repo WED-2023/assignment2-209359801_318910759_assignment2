@@ -82,29 +82,31 @@
     
     <!-- Configuration Screen -->
     <div id="conf" class="screen" style="display:none">
-      <h2>Coniguration</h2>
-
-      <form id="shootForm" onsubmit="return conf1(event)">
-        <h3 for="shoot">Select a shooting key (Press a key on the keyboard to select)</h3><br>
-        <input type="text" placeholder="Pick a key to Shoot" id="shoot" required readonly><br> <br><br>
-      </form>
-
-      <form id="gameTimeForm">
-        <h3 for="gameTime">Select the game time (minimum 2 minutes):</h3><br>
+      <h2>Configuration</h2>
+    
+      <form id="configForm" onsubmit="return conf1(event)">
+        
+        <h3>Select a shooting key of the Aircraft (Press a key on the keyboard to select)</h3>
+        <input type="text" placeholder="Pick a key to Shoot" id="shoot" required readonly><br><br><br>
+    
+        <h3>Select the game time (minimum 2 minutes):</h3>
         <input type="number" id="gameTime" name="gameTime" min="2" value="2" required><br><br><br>
-      </form>
-
-      <form id="shipColorForm">
-        <h3> Choose your Aircraft:</h3><br>
+    
+        <h3>Choose your Aircraft:</h3><br>
         <div class="color-options">
-          <img src="images/Hero's Aircrafts/hero_AirCraft.png" alt="Color 2" class="color-option" data-color="#00FF00">
+          <img src="images/Hero's Aircrafts/hero_orange_AirCraft.png" alt="hero_orange" class="color-option" data-color="orange">
+          <img src="images/Hero's Aircrafts/hero_purple_AirCraft.png" alt="hero_purple" class="color-option" data-color="purple">
+          <img src="images/Hero's Aircrafts/hero_green_AirCraft.png" alt="hero_green" class="color-option" data-color="green">
+          <img src="images/Hero's Aircrafts/hero_blue_AirCraft.png" alt="hero_blue" class="color-option" data-color="blue">
         </div>
+    
+        <br><br>
+        <button type="submit">Start Game</button>
+    
       </form>
-
-      <button onclick="startGame()">Start Game</button>
-
+    
     </div>
-
+    
   </main>
 
 

@@ -75,8 +75,63 @@ function registerUser(event){
     }
 }
 
-function conf1(event){
-    showScreen 
+
+let shoot = " ";
+let game_time = 2;
+let color = "";
+
+// Check User game Setting
+function conf1(event) {
+    event.preventDefault();
+
+    shoot = document.getElementById('shoot').value;
+    game_time = document.getElementById('gameTime').value;
+
+    if (shoot === "") {
+        alert("You must select a shooting key!");
+        return false;
+    }
+
+    if (color === "") {
+        alert("You must select an Aircraft!");
+        return false;
+    }
+
+    startGame();
 }
 
-  
+function setShootKey(event) {
+    const shootInput = document.getElementById('shoot');
+    shootInput.value = event.key;
+    shoot = event.key;
+}
+
+function highlightSelected(selectedOption) {
+    const colorOptions = document.querySelectorAll('.color-option');
+    colorOptions.forEach(option => {
+        option.style.border = "none";
+    });
+    selectedOption.style.border = "3px solid yellow";
+}
+
+function initConfiguration() {
+    const shootInput = document.getElementById('shoot');
+    const colorOptions = document.querySelectorAll('.color-option');
+
+    shootInput.addEventListener('focus', function () {
+        document.addEventListener('keydown', setShootKey);
+    });
+
+    shootInput.addEventListener('blur', function () {
+        document.removeEventListener('keydown', setShootKey);
+    });
+
+    colorOptions.forEach(option => {
+        option.addEventListener('click', function () {
+            color = option.getAttribute('data-color');
+            highlightSelected(option);
+        });
+    });
+}
+
+initConfiguration();
