@@ -82,11 +82,27 @@
     
     <!-- Configuration Screen -->
     <div id="conf" class="screen" style="display:none">
-      <canvas id="gameConf" width="800" height="600"></canvas>
       <h2>Coniguration</h2>
-      <form onsubmit="return pick_shoot(event)">
-        <input type="text" placeholder="Pick a key to Shoot" id="shoot" required><br>
+
+      <form id="shootForm" onsubmit="return conf1(event)">
+        <h3 for="shoot">Select a shooting key (Press a key on the keyboard to select)</h3><br>
+        <input type="text" placeholder="Pick a key to Shoot" id="shoot" required readonly><br> <br><br>
       </form>
+
+      <form id="gameTimeForm">
+        <h3 for="gameTime">Select the game time (minimum 2 minutes):</h3><br>
+        <input type="number" id="gameTime" name="gameTime" min="2" value="2" required><br><br><br>
+      </form>
+
+      <form id="shipColorForm">
+        <h3> Choose your Aircraft:</h3><br>
+        <div class="color-options">
+          <img src="images/Hero's Aircrafts/hero_AirCraft.png" alt="Color 2" class="color-option" data-color="#00FF00">
+        </div>
+      </form>
+
+      <button onclick="startGame()">Start Game</button>
+
     </div>
 
   </main>

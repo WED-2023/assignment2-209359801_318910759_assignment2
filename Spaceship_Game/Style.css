@@ -121,7 +121,7 @@ footer {
   box-sizing: border-box;
 }
 
-#register h2, #login h2 {
+#register h2, #login h2, #conf h2{
   font-size: 40px;
   color: #00ffff;
   text-shadow: 0 0 15px #00ffff;
@@ -129,7 +129,7 @@ footer {
   margin-bottom: 20px;
 }
 
-#register input, #login input {
+#register input, #login input, #conf input {
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
@@ -140,7 +140,7 @@ footer {
   box-sizing: border-box;
 }
 
-#register button, #login button {
+#register button, #login button, #conf button {
   background-color: #222;
   color: white;
   border: 2px solid #00ffff;
@@ -152,9 +152,12 @@ footer {
   border-radius: 10px;
 }
 
-#register button:hover, #login button:hover {
+#register button:hover, #login button:hover, #conf button:hover {
   background-color: #00ffff;
   color: black;
+}
+#lable{
+  
 }
 
 dialog::backdrop {
@@ -178,4 +181,21 @@ dialog {
   font-weight: bold;
   font-size: 18px;
   color: red;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+}
+
+.color-option {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+}
+
+.color-option:hover {
+  border: 2px solid #333;
 }

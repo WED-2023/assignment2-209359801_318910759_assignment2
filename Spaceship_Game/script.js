@@ -75,4 +75,8 @@ function registerUser(event){
     }
 }
 
+function conf1(event){
+    showScreen 
+}
+
   
