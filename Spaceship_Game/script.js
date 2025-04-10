@@ -1,7 +1,7 @@
 
 // Change the screens of the menu
 
-function showScreen(screen_id){
+function showScreen(screen_id) {
     const screens = document.querySelectorAll('.screen');
     screens.forEach(screen => {
         screen.style.display = 'none';
@@ -12,7 +12,12 @@ function showScreen(screen_id){
         selectedScreen.style.display = 'flex';
     }
 
-    // Clear register fields
+    const menuMusic = document.getElementById('menu-music');
+    menuMusic.volume = 0.3;
+    if (menuMusic.paused) {
+        menuMusic.play();
+    }
+
     if (screen_id === 'register') {
         document.getElementById('reg-username').value = '';
         document.getElementById('reg-password').value = '';
@@ -22,12 +27,12 @@ function showScreen(screen_id){
         document.getElementById('reg-email').value = '';
     }
 
-    // Clear login fields
     if (screen_id === 'login') {
         document.getElementById('login-username').value = '';
         document.getElementById('login-password').value = '';
     }
 }
+
 
 let users_array = [{'p':'p'}]
 // Check the Register
