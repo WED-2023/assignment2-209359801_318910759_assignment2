@@ -181,6 +181,14 @@ function init_enemy_AirCraft_Images(){
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+
 let bgY = 0;
 let bgSpeed = 1; // background speed
 
