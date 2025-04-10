@@ -81,6 +81,11 @@ function registerUser(event){
 }
 
 function setShootKey(event) {
+
+    if (event.key === " ") { 
+        event.preventDefault();
+    }
+
     const shootInput = document.getElementById('shoot');
     shootInput.value = event.key;
     shoot = event.key;
@@ -119,9 +124,9 @@ initConfiguration();
 let shoot = " ";
 let game_time = 2;
 let color = "";
-const heroImage = new Image()
-let enemyImage = []
-let score = 0
+const heroImage = new Image();
+let enemyImage = [];
+let score = 0;
 
 // Check User game Setting
 function conf1(event) {
@@ -139,25 +144,31 @@ function conf1(event) {
         alert("You must select an Aircraft!");
         return false;
     }
-    init_AirCraft_Images(color);
+
+    init_hero_AirCraft_Images(color);
+    init_enemy_AirCraft_Images();
+
     startGame();
 }
 
-// Init the images to the AirCraft
-function init_AirCraft_Images(color){
+// Init the images to the hero AirCraft
+function init_hero_AirCraft_Images(color){
     heroImage.src = `images/H_Aircrafts/hero_${color}_AirCraft.png`;
+}
 
+// Init the images of the enemy AirCraft
+function init_enemy_AirCraft_Images(){
     for (let i = 0; i < 4; i++){
-        enemyImage[i] = []
+        enemyImage[i] = [];
         for (let j = 0; j < 5 ; j++){
             enemyImage[i][j] = new Image();
-            if(i == 0){
+            if(i === 0){
                 enemyImage[i][j].src = "images\E_Aircrafts\enemy_purple_AirCraft.png"
             }
-            else if(i == 1){
+            else if(i === 1){
                 enemyImage[i][j].src = "images\E_Aircrafts\enemy_red_AirCraft.png"
             }
-            else if(i == 2){
+            else if(i === 2){
                 enemyImage[i][j].src = "images\E_Aircrafts\enemy_blue_AirCraft.png"
             }
             else{
@@ -194,18 +205,18 @@ function update(){
     // TODO: limit hero movment into 40% of the canvas
 }
 
-
+// Loop of the game
 function gameLoop() {
     update();
     draw();
     requestAnimationFrame(gameLoop);
 }
 
+// Draw the game
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     drawBackground();
-
     drawHero();
 }
 
@@ -213,7 +224,7 @@ function drawHero() {
     ctx.drawImage(heroImage, hero.x, hero.y, 100, 100);
 }
 
-
+// Mooving the background
 const bgImage = new Image();
 bgImage.src = "images/game_star.png";
 function drawBackground() {
@@ -228,13 +239,26 @@ function drawBackground() {
 }
 
 
-
+// Start the Game
 function startGame() {
     const menuMusic = document.getElementById('menu-music');
     menuMusic.pause();
     menuMusic.currentTime = 0;
 
     showScreen('game');
+    window.scrollTo(0, 0);
 
     gameLoop();
 }
+
+// Block Arrow Keys Scroll only in Game Screen
+document.addEventListener('keydown', function(event) {
+    const isGameScreen = document.getElementById('game').style.display === 'flex';
+
+    if (isGameScreen) {
+        const keysToPrevent = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', shoot];
+        if (keysToPrevent.includes(event.key)) {
+            event.preventDefault();
+        }
+    }
+});
