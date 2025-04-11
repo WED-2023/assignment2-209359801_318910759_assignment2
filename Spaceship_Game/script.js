@@ -125,11 +125,13 @@ initConfiguration();
 let shoot = " ";
 let game_time = 2;
 let color = "";
+let GameOver = false;
 
 let heroBullets = [];
 
 const shootImage = new Image();
 const heroImage = new Image();
+const enemyShootingImage = new Image();
 
 
 let enemyImage = [];
@@ -173,6 +175,9 @@ function init_hero_AirCraft_Images(color){
 
 // Init the images of the enemy AirCraft
 function init_enemy_AirCraft_Images(){
+
+    enemyShootingImage.src = 'images/Lasers/red.laser.png';
+
     for (let i = 0; i < 4; i++){
         enemyImage[i] = [];
         for (let j = 0; j < 5 ; j++){
@@ -347,7 +352,14 @@ function drawEnemys() {
     }
 }
 
-
+function StartTimer(){
+    const timer = setInterval(() => {
+        game_time--;
+        if(game_time <= 0)
+            clearInterval(timer);
+            GameOver = true;
+    }, 1000);
+}
 
 // Draw the hero bullets
 function drawHeroBullets(){
@@ -382,6 +394,7 @@ function startGame() {
     window.scrollTo(0, 0);
 
     gameLoop();
+    StartTimer();
 }
 
 // Block Arrow Keys Scroll only in Game Screen
