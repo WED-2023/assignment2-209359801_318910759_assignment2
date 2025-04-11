@@ -87,6 +87,7 @@ function setShootKey(event) {
     }
 
     const shootInput = document.getElementById('shoot');
+
     shootInput.value = event.key;
     shoot = event.key;
 }
@@ -124,11 +125,14 @@ initConfiguration();
 let shoot = " ";
 let game_time = 2;
 let color = "";
+
 let heroBullets = [];
+
 const shootImage = new Image();
 const heroImage = new Image();
-let enemyImage = [];
 
+
+let enemyImage = [];
 let enemyStartX = 100;
 let enemyStartY = 50;
 let enemyDirX = 2;
@@ -136,6 +140,7 @@ let enemyDirY = 1;
 let enemyChangeDirectionTimer = 0;
 
 let score = 0;
+
 
 // Check User game Setting
 function conf1(event) {
@@ -191,6 +196,7 @@ function init_enemy_AirCraft_Images(){
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -202,15 +208,15 @@ resizeCanvas();
 let bgY = 0;
 let bgSpeed = 1; // background speed
 
-
-
 const hero = {x : canvas.width / 2 - heroImage.width / 2 - 50, y : canvas.height * 0.8, width : 50, height : 50, speed : 7.5};
 const keys = {};
+
 document.addEventListener("keydown", e => {keys[e.key] = true});
 document.addEventListener("keyup", e => {keys[e.key] = false});
 
 // Update the game every 16 ms
 function update(){
+
     if(keys["ArrowUp"] && hero.y > canvas.height * 0.6) hero.y -= hero.speed;
     if(keys["ArrowDown"] && hero.y < canvas.height - 100) hero.y += hero.speed;
     if(keys["ArrowLeft"] && hero.x > 0) hero.x -= hero.speed;
@@ -245,13 +251,12 @@ function update(){
         enemyDirY *= -1;
     }
 
-    if(keys[shoot]) shootBullet();
+    if(keys[shoot]) shootHeroBullet();
+
     for(let i=0; i<heroBullets.length; i++){
         heroBullets[i].y -= heroBullets[i].speed;
     }
 
-    heroBullets = heroBullets.filter(bullet => bullet.y > 0);
-    
 
     // Collision detection between hero_shoot to enemy
     for (let i = 0; i < heroBullets.length; i++) {
@@ -294,7 +299,8 @@ function update(){
 
 // Shoot the hero bullet and sound
 const heroShootSound = new Audio("audio/hero_shoot.wav");
-function shootBullet(){
+
+function shootHeroBullet(){
     if(heroBullets.length === 0 || heroBullets[heroBullets.length-1].y < hero.y - 100) { 
         heroShootSound.currentTime = 0;
         heroShootSound.play();
@@ -343,12 +349,13 @@ function drawEnemys() {
 
 
 
-//Draw the Shooting
+// Draw the hero bullets
 function drawHeroBullets(){
     heroBullets.forEach(bullet => {
         ctx.drawImage(shootImage, bullet.x, bullet.y, bullet.width, bullet.height);
     });
 }
+
 
 // Mooving the background
 const bgImage = new Image();
@@ -375,6 +382,7 @@ function startGame() {
     window.scrollTo(0, 0);
 
     gameLoop();
+    shootEnemyBullet(0, 0);
 }
 
 // Block Arrow Keys Scroll only in Game Screen
