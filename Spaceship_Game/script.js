@@ -382,7 +382,6 @@ function startGame() {
     window.scrollTo(0, 0);
 
     gameLoop();
-    shootEnemyBullet(0, 0);
 }
 
 // Block Arrow Keys Scroll only in Game Screen
