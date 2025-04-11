@@ -214,12 +214,20 @@ dialog {
   height: 90vh;
 }
 
-#scoreBoard {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: white;
+#infoBar {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 200px;
   font-size: 35px;
+  color: white;
   font-family: Arial, sans-serif;
-  z-index: 10;
+  z-index: 1000;
+  text-align: center;
 }
+
+
