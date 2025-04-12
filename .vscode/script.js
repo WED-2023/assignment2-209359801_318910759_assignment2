@@ -1,6 +1,9 @@
 
 
 const menuMusic = document.getElementById('menu-music');
+let playedTime = 0;
+
+
 
 // Change the screens of the menu
 function showScreen(screen_id) {
@@ -145,6 +148,8 @@ let enemySpeedIncreaseCounter = 0;
 
 
 let score = 0;
+let count_hero_shoot = 0;
+let count_dead_enemy = 0;
 let explosionSound_hero = new Audio('audio/explosion_hero.mp3');
 let explosionSound_enemy = new Audio('audio/explosion_enemy.mp3');
 
@@ -303,6 +308,7 @@ function update(){
     
                         // Remove the enemy
                         enemyImage[row][col] = null;
+                        count_dead_enemy++;
 
 
                         playExplosionSound_Enemy()
@@ -405,6 +411,7 @@ const enemyShootSound = new Audio("audio/enemy_shoot.wav");
 function shootHeroBullet(){
     if(!hero_Visible) return;
     if(heroBullets.length === 0 || heroBullets[heroBullets.length-1].y < hero.y - 100) { 
+        count_hero_shoot++;
         heroShootSound.currentTime = 0;
         heroShootSound.play();
         heroBullets.push({x: hero.x + 50 - 25, y: hero.y, width: 50, height: 60, speed: 13});
@@ -513,7 +520,8 @@ function StartTimer(){
             clearInterval(timer);
             return;
         }
-
+        
+        playedTime ++;
         total_seconds--;
 
         let minutes = Math.floor(total_seconds / 60);
@@ -604,11 +612,56 @@ function showGameOverScreen(message) {
     if(total_seconds === 0 && score <= 100){
         message = "You can do better";
     }
+
+    // Calculate the total Playes Time
+    let minutesPlayed = Math.floor(playedTime / 60);
+    let secondsPlayed = playedTime % 60;
+    if (secondsPlayed < 10) secondsPlayed = "0" + secondsPlayed;
+    if (minutesPlayed < 10) minutesPlayed = "0" + minutesPlayed;
+
+     // Calculate Accuracy
+     let accuracy = 0;
+     if (count_hero_shoot > 0) {
+         accuracy = (count_dead_enemy / count_hero_shoot) * 100;
+     }
+
     document.getElementById('gameOverMessage').innerText = message;
-    document.getElementById('finalScore').innerText = 'Your Score: ' + score;
+    document.getElementById('finalScore').innerText = 'Score: ' + score;
+    document.getElementById('accuracy').innerText = 'Accuracy: ' + accuracy.toFixed(2) + ' %';
+    document.getElementById('timePlayed').innerText = 'Time Played: ' + minutesPlayed + ':' + secondsPlayed;
     showScreen('gameOverScreen');
 }
 
 function restartGame(){
-    location.reload();
+    resetGame();
+    showScreen('conf');
 }
+
+function resetGoHome(){
+    resetGame();
+    showScreen('welcome');
+}
+
+
+function resetGame(){
+    // Reset game variables
+    GameOver = false;
+    score = 0;
+    lives = 3;
+    count_hero_shoot = 0;
+    count_dead_enemy = 0;
+    playedTime = 0;
+    heroBullets = [];
+    enemyBullets = [];
+    enemySpeedIncreaseCounter = 0;
+    enemy_speed = 2;
+    enemyStartX = 100;
+    enemyStartY = 50;
+    hero.x = (canvas.width / 2) - 50;
+    hero.y = canvas.height * 0.8;
+
+    document.getElementById('scoreBoard').innerText = 'Score: 0';
+    document.getElementById('livesBoard').innerText = 'Lives: 3';
+    document.getElementById('timerBoard').innerText = 'Time: 00:00';
+}
+
