@@ -294,6 +294,7 @@ function update(){
 
     for (let i = 0; i < heroBullets.length; i++) {
         const bullet = heroBullets[i];
+        let hit = false;
 
         for (let row = 0; row < 4; row++) {
             for (let col = 0; col < 5; col++) {
@@ -318,18 +319,21 @@ function update(){
 
                         if(score === 250){
                             GameOver = true;
-                            showGameOverScreen("Champion");
+                            showGameOverScreen("Champion!");
                             return;
                         }
 
                         document.getElementById('scoreBoard').innerText = 'Score: ' + score;
 
+                        hit = true;
                         break;
                     }
                 }
             }
+            if (hit) break;
         }
     }
+
 
     for (let i = bulletsToRemove.length - 1; i >= 0; i--) {
         heroBullets.splice(bulletsToRemove[i], 1);
@@ -421,6 +425,7 @@ function shootHeroBullet(){
         heroShootSound.currentTime = 0;
         heroShootSound.play();
         heroBullets.push({x: hero.x + 50 - 25, y: hero.y, width: 50, height: 60, speed: 13});
+        
     }
 }
 
@@ -631,35 +636,49 @@ function showGameOverScreen(message) {
     menuMusic.pause();
 
     if(total_seconds === 0 && score <= 100){
-        message = "You can do better";
+        message = "You can do better!";
     }
 
-    // Calculate the total Playes Time
     let minutesPlayed = Math.floor(playedTime / 60);
     let secondsPlayed = playedTime % 60;
     if (secondsPlayed < 10) secondsPlayed = "0" + secondsPlayed;
     if (minutesPlayed < 10) minutesPlayed = "0" + minutesPlayed;
 
-     // Calculate Accuracy
-     let accuracy = 0;
-     if (count_hero_shoot > 0) {
-         accuracy = (count_dead_enemy / count_hero_shoot) * 100;
-     }
+    let accuracy = 0;
+    if (count_hero_shoot > 0) {
+        accuracy = (count_dead_enemy / count_hero_shoot) * 100;
+    }
 
-    document.getElementById('gameOverMessage').innerText = message;
-    document.getElementById('finalScore').innerText = 'Score: ' + score;
-    document.getElementById('accuracy').innerText = 'Accuracy: ' + accuracy.toFixed(2) + ' %';
-    document.getElementById('timePlayed').innerText = 'Time Played: ' + minutesPlayed + ':' + secondsPlayed;
+    const messageElement = document.getElementById('gameOverMessage');
+    messageElement.innerText = message;
+    messageElement.className = '';
+
+    if (message === "Champion!") {
+        messageElement.classList.add('champion-message');
+    } else if (message === "You Lost!") {
+        messageElement.classList.add('lost-message');
+    } else {
+        messageElement.classList.add('better-message');
+    }
+
+    document.getElementById('finalScore').innerText = score;
+    document.getElementById('accuracy').innerText = accuracy.toFixed(2) + ' %';
+    document.getElementById('timePlayed').innerText = minutesPlayed + ':' + secondsPlayed;
+
     showScreen('gameOverScreen');
 }
 
+// Reastart the game and go back to the same user
 function restartGame(){
     resetGame();
+    resetConfigurationScreen();
     showScreen('conf');
 }
 
-function resetGoHome(){
+// Reastart the game and go back to the Home screen
+function restartGame_andHome(){
     resetGame();
+    resetConfigurationScreen();
     showScreen('welcome');
 }
 
@@ -715,4 +734,19 @@ function startCountdown() {
         }
     }, 1000);
 }
+
+
+function resetConfigurationScreen(){
+    document.getElementById('shoot').value = '';
+    document.getElementById('gameTime').value = 2;
+
+    shoot = ' ';
+    color = '';
+
+    const colorOptions = document.querySelectorAll('.color-option');
+    colorOptions.forEach(option => {
+        option.style.border = "none";
+    });
+}
+
 

@@ -249,3 +249,79 @@ dialog {
 }
 
 
+#countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+  color: yellow;
+  text-shadow: 0 0 10px red;
+  display: none;
+  z-index: 1000;
+}
+
+
+#gameOverScreen h2 {
+  font-size: 60px;
+  color: #00ffff;
+  text-shadow: 0 0 15px #00ffff;
+  margin-bottom: 20px;
+}
+
+#gameOverResults {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00ffff;
+  border-radius: 20px;
+  padding: 30px;
+  width: 400px;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 25px;
+  color: white;
+}
+
+#gameOverResults table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#gameOverResults td {
+  padding: 10px 0;
+  border-bottom: 1px solid #00ffff;
+}
+
+#gameOverResults td:first-child {
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+#gameOverScreen button {
+  margin-top: 20px;
+}
+
+#gameOverMessage {
+  margin-bottom: 20px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+
+.champion-message {
+  color: gold;
+  text-shadow: 0 0 15px orange, 0 0 30px gold;
+}
+
+
+.lost-message {
+  color: red;
+  text-shadow: 0 0 15px darkred, 0 0 30px red;
+}
+
+
+.better-message {
+  color: rgb(0, 47, 255);
+  text-shadow: 0 0 10px yellow, 0 0 20px orange;
+}
+
+

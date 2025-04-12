@@ -238,14 +238,8 @@
       </div>
       <canvas id="gameCanvas" width="1200" height="800"></canvas>
 
-      <div id="countdown" style="position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%);
-            font-size: 100px; 
-            color: yellow; 
-            text-shadow: 0 0 10px red; 
-            display: none; 
-            z-index: 1000;">
-      </div>
+      <div id="countdown"></div>
+
 
     
     </div>
@@ -254,13 +248,19 @@
     <div id="gameOverScreen" class="screen" style="display:none">
       <h2>Game Over!</h2>
       <h3 id="gameOverMessage"></h3>
-      <h3 id="finalScore"></h3>
-      <h3 id="accuracy"></h3>
-      <h3 id="timePlayed"></h3>
-
+  
+      <div id="gameOverResults">
+          <table>
+              <tr><td>Score:</td><td id="finalScore"></td></tr>
+              <tr><td>Accuracy:</td><td id="accuracy"></td></tr>
+              <tr><td>Time Played:</td><td id="timePlayed"></td></tr>
+          </table>
+      </div>
+  
       <button onclick="restartGame()">Play Again</button>
-      <button onclick="resetGoHome()">Back to Menu</button>
-    </div>
+      <button onclick="restartGame_andHome()">Back to Menu</button>
+  </div>
+  
 
     
     
