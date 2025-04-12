@@ -3,8 +3,6 @@
 const menuMusic = document.getElementById('menu-music');
 let playedTime = 0;
 
-
-
 // Change the screens of the menu
 function showScreen(screen_id) {
     const screens = document.querySelectorAll('.screen');
@@ -735,7 +733,7 @@ function startCountdown() {
     }, 1000);
 }
 
-
+// If start a new game it will reset the old Settings
 function resetConfigurationScreen(){
     document.getElementById('shoot').value = '';
     document.getElementById('gameTime').value = 2;
@@ -748,5 +746,3 @@ function resetConfigurationScreen(){
         option.style.border = "none";
     });
 }
-
-
