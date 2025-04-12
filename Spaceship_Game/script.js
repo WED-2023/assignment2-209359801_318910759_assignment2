@@ -1,6 +1,8 @@
 
-// Change the screens of the menu
 
+const menuMusic = document.getElementById('menu-music');
+
+// Change the screens of the menu
 function showScreen(screen_id) {
     const screens = document.querySelectorAll('.screen');
     screens.forEach(screen => {
@@ -12,11 +14,6 @@ function showScreen(screen_id) {
         selectedScreen.style.display = 'flex';
     }
 
-    const menuMusic = document.getElementById('menu-music');
-    menuMusic.volume = 0.3;
-    if (menuMusic.paused) {
-        menuMusic.play();
-    }
 
     if (screen_id === 'register') {
         document.getElementById('reg-username').value = '';
@@ -240,6 +237,10 @@ document.addEventListener("keyup", e => {keys[e.key] = false});
 // Update the game every 16 ms
 function update(){
 
+    if(GameOver){
+        return;
+    }
+
     if(hero_Visible){
         if(keys["ArrowUp"] && hero.y > canvas.height * 0.6) hero.y -= hero.speed;
         if(keys["ArrowDown"] && hero.y < canvas.height - 100) hero.y += hero.speed;
@@ -310,6 +311,11 @@ function update(){
                         heroBullets.splice(i, 1);
                         i--;
                         score += ((5-row-1) * 5)  // Adding the score
+                        if(score === 250){
+                            GameOver = true;
+                            showGameOverScreen("Champion");
+                            return;
+                        }
                         document.getElementById('scoreBoard').innerText = 'Score: ' + score;
                         break;
                     }
@@ -335,6 +341,11 @@ function update(){
             hero_Visible = false;  // Hide hero
             playExplosionSound_Hero();
             lives--;
+            if(lives == 0){
+                GameOver = true;
+                showGameOverScreen("You Lost!");
+                return;
+            }
             document.getElementById('livesBoard').innerText = 'Lives: ' + lives;
 
 
@@ -349,10 +360,12 @@ function update(){
             }, 1000);
 
             setTimeout(() => {
-                // Return hero to start position after 3 secound
-                hero.x = canvas.width / 2 - 50;
-                hero.y = canvas.height * 0.8;
-                hero_Visible = true;
+                if(!GameOver){
+                    // Return hero to start position after 3 secound
+                    hero.x = canvas.width / 2 - 50;
+                    hero.y = canvas.height * 0.8;
+                    hero_Visible = true;
+                }
             }, 3000);
 
             // Remove the bullet
@@ -367,13 +380,7 @@ function update(){
     }
     
     // remove bullets that passed the screen
-    enemyBullets = enemyBullets.filter(bullet => bullet.y < canvas.height);
-    
-
-
-
-    // TODO: add collision detection between enemy_shoot to hero
-    
+    enemyBullets = enemyBullets.filter(bullet => bullet.y < canvas.height); 
 
 }
 
@@ -449,9 +456,11 @@ function increaseEnemySpeed(){
 
 // Loop of the game
 function gameLoop() {
-    update();
-    draw();
-    requestAnimationFrame(gameLoop);
+    if(!GameOver){
+        update();
+        draw();
+        requestAnimationFrame(gameLoop);
+    }
 }
 
 // Draw the game
@@ -496,14 +505,35 @@ function drawEnemys() {
     }
 }
 
+
+// Timer function
 function StartTimer(){
     const timer = setInterval(() => {
-        game_time--;
-        if(game_time <= 0)
+        if(GameOver){
+            clearInterval(timer);
+            return;
+        }
+
+        total_seconds--;
+
+        let minutes = Math.floor(total_seconds / 60);
+        let seconds = total_seconds % 60;
+
+        if (seconds < 10) seconds = "0" + seconds;
+        if (minutes < 10) minutes = "0" + minutes;
+
+        document.getElementById('timerBoard').innerText = `Time: ${minutes}:${seconds}`;
+
+        if(total_seconds <= 0){
             clearInterval(timer);
             GameOver = true;
+            showGameOverScreen("Winner!");
+            return;
+        }
+
     }, 1000);
 }
+
 
 // Draw the hero bullets
 function drawHeroBullets(){
@@ -535,18 +565,19 @@ function drawBackground() {
     ctx.drawImage(bgImage, 0, bgY - canvas.height, canvas.width, canvas.height);
 }
 
-
+let enemySpeedInterval;
 // Start the Game
 function startGame() {
     const menuMusic = document.getElementById('menu-music');
-    menuMusic.pause();
+    menuMusic.play();
     menuMusic.currentTime = 0;
 
     showScreen('game');
     window.scrollTo(0, 0);
 
-    // Every 5 Secound calls thr function to increase enemy speed
-    setInterval(increaseEnemySpeed, 3000);
+    // Every 5 Secound calls the function to increase enemy speed
+    enemySpeedInterval = setInterval(increaseEnemySpeed, 3000);
+
 
     gameLoop();
     StartTimer();
@@ -563,3 +594,21 @@ document.addEventListener('keydown', function(event) {
         }
     }
 });
+
+
+function showGameOverScreen(message) {
+
+    clearInterval(enemySpeedInterval);
+    menuMusic.pause();
+
+    if(total_seconds === 0 && score <= 100){
+        message = "You can do better";
+    }
+    document.getElementById('gameOverMessage').innerText = message;
+    document.getElementById('finalScore').innerText = 'Your Score: ' + score;
+    showScreen('gameOverScreen');
+}
+
+function restartGame(){
+    location.reload();
+}

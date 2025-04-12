@@ -205,7 +205,7 @@
         <input type="text" placeholder="Pick a key to Shoot" id="shoot" required readonly><br><br><br>
     
         <h3>Select the game time (minimum 2 minutes):</h3>
-        <input type="number" id="gameTime" name="gameTime" min="2" value="2" required><br><br><br>
+        <input type="number" id="gameTime" name="gameTime" min="2" value="2" required><br><br><br>  
     
         <h3>Choose your Aircraft:</h3><br>
         <div class="color-options">
@@ -226,17 +226,24 @@
     <!-- Canvas -->
     <div id="game" class="screen" style="display:none">
   
-    <div id="infoBar">
-      <span id="livesBoard">Lives: 3</span>
-      <span id="timerBoard">Time: 00:00</span>
-      <span id="scoreBoard">Score: 0</span>
-    </div>
-     
-    
-    
+      <div id="infoBar">
+        <span id="livesBoard">Lives: 3</span>
+        <span id="timerBoard">Time: 00:00</span>
+        <span id="scoreBoard">Score: 0</span>
+      </div>
       <canvas id="gameCanvas" width="1200" height="800"></canvas>
     
     </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen" style="display:none">
+      <h2>Game Over!</h2>
+      <h3 id="gameOverMessage"></h3>
+      <h3 id="finalScore"></h3>
+      <button onclick="restartGame()">Play Again</button>
+      <button onclick="showScreen('welcome')">Back to Menu</button>
+    </div>
+
     
     
   </main>
