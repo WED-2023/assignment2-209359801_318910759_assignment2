@@ -156,16 +156,34 @@ footer {
   background-color: #00ffff;
   color: black;
 }
-.select{
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 10px;
+  flex-direction: row;
+}
+
+.select {
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
   border: none;
   outline: none;
   font-size: 16px;
-  width: 15%;
+  min-width: 60px;
   box-sizing: border-box;
+  text-align: center;
 }
+
+.year-select {
+  min-width: 80px;
+}
+
+
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
