@@ -290,45 +290,51 @@ function update(){
 
 
     // Collision detection between hero_shoot to enemy
+    let bulletsToRemove = [];
+
     for (let i = 0; i < heroBullets.length; i++) {
         const bullet = heroBullets[i];
-    
+
         for (let row = 0; row < 4; row++) {
             for (let col = 0; col < 5; col++) {
                 const enemy = enemyImage[row][col];
-    
+
                 if (enemy !== null) {
                     let enemyX = enemyStartX + col * (canvas.width / 6);
                     let enemyY = enemyStartY + row * (canvas.height / 8);
-    
+
                     if (bullet.x < enemyX + 100 &&
                         bullet.x + bullet.width > enemyX &&
                         bullet.y < enemyY + 100 &&
                         bullet.y + bullet.height > enemyY) {
-    
-                        // Remove the enemy
+
                         enemyImage[row][col] = null;
                         count_dead_enemy++;
 
+                        playExplosionSound_Enemy();
 
-                        playExplosionSound_Enemy()
+                        bulletsToRemove.push(i);
+                        score += ((5-row-1) * 5);
 
-                        // Remove the bullet
-                        heroBullets.splice(i, 1);
-                        i--;
-                        score += ((5-row-1) * 5)  // Adding the score
                         if(score === 250){
                             GameOver = true;
                             showGameOverScreen("Champion");
                             return;
                         }
+
                         document.getElementById('scoreBoard').innerText = 'Score: ' + score;
+
                         break;
                     }
                 }
             }
         }
     }
+
+    for (let i = bulletsToRemove.length - 1; i >= 0; i--) {
+        heroBullets.splice(bulletsToRemove[i], 1);
+    }
+
     
 
     for (let i = 0; i < enemyBullets.length; i++) {
@@ -589,8 +595,11 @@ function startGame() {
     enemySpeedInterval = setInterval(increaseEnemySpeed, 3000);
 
 
-    gameLoop();
-    StartTimer();
+    //gameLoop();
+    //StartTimer();
+
+    startCountdown();
+
 }
 
 // Block Arrow Keys Scroll only in Game Screen
@@ -676,5 +685,34 @@ function resetGame(){
     document.getElementById('scoreBoard').innerText = 'Score: 0';
     document.getElementById('livesBoard').innerText = 'Lives: 3';
     document.getElementById('timerBoard').innerText = 'Time: 00:00';
+}
+
+// Screen before the game start
+function startCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    let count = 3;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBackground();
+
+    countdownElement.style.display = 'block';
+    countdownElement.innerText = count;
+
+    let countdownInterval = setInterval(() => {
+        count--;
+        if (count === 0) {
+            countdownElement.innerText = 'Protect the Universe!';
+        } else {
+            countdownElement.innerText = count;
+        }
+
+        if (count < 0) {
+            clearInterval(countdownInterval);
+            countdownElement.style.display = 'none';
+
+            gameLoop();
+            StartTimer();
+        }
+    }, 1000);
 }
 
