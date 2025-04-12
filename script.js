@@ -69,6 +69,7 @@ function registerUser(event){
         }
     }
 
+    
     if (found) {
         alert('Login Success!');
         // Need to change to the play screen
