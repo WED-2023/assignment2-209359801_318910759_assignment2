@@ -231,7 +231,7 @@ resizeCanvas();
 let bgY = 0;
 let bgSpeed = 1; // background speed
 
-const hero = {x : (canvas.width / 2) - (heroImage.width / 2) - 50, y : canvas.height * 0.8, width : 50, height : 50, speed : 10};
+let hero;
 const keys = {};
 let hero_Visible = true;
 let lives = 3;
@@ -583,6 +583,8 @@ function startGame() {
     showScreen('game');
     window.scrollTo(0, 0);
 
+    hero = {x : (canvas.width / 2) - 50, y : canvas.height * 0.8, width : 50, height : 50, speed : 10};
+
     // Every 5 Secound calls the function to increase enemy speed
     enemySpeedInterval = setInterval(increaseEnemySpeed, 3000);
 
@@ -600,10 +602,20 @@ document.addEventListener('keydown', function(event) {
         if (keysToPrevent.includes(event.key)) {
             event.preventDefault();
         }
+
+        // Prevent default for arrows always
+        if (keysToPrevent.includes(event.key)) {
+            event.preventDefault();
+        }
+
+        // Prevent default for space only if it's not the shoot key
+        if (event.key === ' ' && shoot !== ' ') {
+            event.preventDefault();
+        }
     }
 });
 
-
+// Gane Over Screen
 function showGameOverScreen(message) {
 
     clearInterval(enemySpeedInterval);
@@ -643,6 +655,7 @@ function resetGoHome(){
 }
 
 
+// Restart the game
 function resetGame(){
     // Reset game variables
     GameOver = false;
