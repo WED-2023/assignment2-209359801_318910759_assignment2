@@ -461,7 +461,7 @@ function shootEnemyBullet() {
         enemyBullets.push({
             x: enemyX + 50 - 15,  // Center the bullet relative to enemy
             y: enemyY + 100,
-            dx: dx,
+            dx: dx,  // for diagnol shooting
             width: 50,  
             height: 60,     
             speed: 5      
@@ -580,7 +580,7 @@ function drawEnemyBullets(){
 
 
 
-// Mooving the background
+// Mooving the background to looks like mooving in space
 const bgImage = new Image();
 bgImage.src = "images/game_star.png";
 function drawBackground() {
