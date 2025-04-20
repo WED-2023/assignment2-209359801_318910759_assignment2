@@ -32,7 +32,7 @@ function showScreen(screen_id) {
 }
 
 
-let users_array = [{'b':'b'}, {'נ':'נ'}]
+let users_array = [{'b':'b'}, {'נ':'נ'}, {'p':'testuser'}]
 // Check the Register
 function registerUser(event){
     event.preventDefault();
@@ -349,6 +349,7 @@ function update(){
 
     for (let i = 0; i < enemyBullets.length; i++) {
         enemyBullets[i].y += enemyBullets[i].speed;
+        enemyBullets[i].x += enemyBullets[i].dx || 0;
     }
 
     // Collision detection between enemy bullets and hero
@@ -455,9 +456,12 @@ function shootEnemyBullet() {
         enemyShootSound.currentTime = 0;
         enemyShootSound.play();
 
+        let dx = (Math.random() - 0.5) * 4;
+
         enemyBullets.push({
             x: enemyX + 50 - 15,  // Center the bullet relative to enemy
             y: enemyY + 100,
+            dx: dx,
             width: 50,  
             height: 60,     
             speed: 5      
