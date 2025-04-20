@@ -72,7 +72,8 @@ function registerUser(event){
     
     if (found) {
         alert('Login Success!');
-        // Need to change to the play screen
+        currentUser = username;
+        highScores = [];
         showScreen('conf');
     } else {
         alert('Username or Password incorrect!');
@@ -125,6 +126,10 @@ let shoot = " ";
 let total_seconds = 2;
 let color = "";
 let GameOver = false;
+let highScores = [];
+let currentUser = null;
+
+
 
 let heroBullets = [];
 let enemyBullets = [];
@@ -181,7 +186,9 @@ function conf1(event) {
     init_hero_AirCraft_Images(color);
     init_enemy_AirCraft_Images();
 
-    startGame();
+    heroImage.onload = () => {
+        startGame();
+    };
 }
 
 // Init the images to the hero AirCraft
@@ -664,8 +671,81 @@ function showGameOverScreen(message) {
     document.getElementById('accuracy').innerText = accuracy.toFixed(2) + ' %';
     document.getElementById('timePlayed').innerText = minutesPlayed + ':' + secondsPlayed;
 
+
+    // Remove highlight from all previous scores
+    highScores.forEach(entry => entry.isCurrent = false);
+
+    // Save the current game result
+    let current = {
+        score: score,
+        accuracy: accuracy.toFixed(2),
+        time: playedTime,  // time in seconds (used for tiebreaker)
+        timeDisplay: minutesPlayed + ":" + secondsPlayed,
+        isCurrent: true
+    };
+
+    highScores.push(current);
+
+    // Sort by score descending, then by shortest time
+    highScores.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.time - b.time;
+    });
+
+    // Assign rank to each entry
+    highScores.forEach((entry, index) => {
+        entry.rank = index + 1;
+    });
+
+    // Keep only the top 5 scores
+    highScores = highScores.slice(0, 5);
+
+    // Render the high score table
+    renderHighScores();
+
+
+
+
     showScreen('gameOverScreen');
 }
+
+
+
+function renderHighScores() {
+    const table = document.getElementById('highScoreList');
+    table.innerHTML = '';
+
+    const headerRow = createScoreRow(['Rank', 'Score', 'Accuracy', 'Time'], true);
+    table.appendChild(headerRow);
+
+    highScores.forEach(entry => {
+        const row = createScoreRow([
+            entry.rank,
+            entry.score,
+            entry.accuracy + ' %',
+            entry.timeDisplay
+        ], false, entry.isCurrent);
+        table.appendChild(row);
+    });
+}
+
+function createScoreRow(data, isHeader = false, highlight = false) {
+    const row = document.createElement('tr');
+    data.forEach(cellText => {
+        const cell = document.createElement(isHeader ? 'th' : 'td');
+        cell.innerText = cellText;
+        row.appendChild(cell);
+    });
+
+    if (highlight) {
+        row.classList.add('highlight-current-score');
+    }
+
+    return row;
+}
+
+
+
 
 // Reastart the game and go back to the same user
 function restartGame(){
@@ -699,6 +779,7 @@ function resetGame(){
     enemyStartY = 50;
     hero.x = (canvas.width / 2) - 50;
     hero.y = canvas.height * 0.8;
+    hero_Visible = true;
 
     document.getElementById('scoreBoard').innerText = 'Score: 0';
     document.getElementById('livesBoard').innerText = 'Lives: 3';

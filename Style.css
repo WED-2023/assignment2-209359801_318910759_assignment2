@@ -91,14 +91,6 @@ button:hover {
   color: #ff6600;
 }
 
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-}
 
 #register, #login {
   display: flex;
@@ -242,7 +234,7 @@ dialog {
   align-items: center;
   gap: 200px;
   font-size: 35px; 
-  color: rgb(0, 0, 0);
+  color: rgb(0, 255, 221);
   font-family: Arial, sans-serif;
   z-index: 1000;
   text-align: center;
@@ -268,6 +260,19 @@ dialog {
   text-shadow: 0 0 15px #00ffff;
   margin-bottom: 20px;
 }
+
+#gameOverScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+
+
 
 #gameOverResults {
   background-color: rgba(0, 0, 0, 0.6);
@@ -323,5 +328,45 @@ dialog {
   color: rgb(0, 47, 255);
   text-shadow: 0 0 10px yellow, 0 0 20px orange;
 }
+
+
+
+#highScoreTable {
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00ffff;
+  border-radius: 20px;
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+#highScoreList {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#highScoreList th {
+  font-size: 22px;
+  padding-bottom: 10px;
+  color: #00ffff;
+}
+
+#highScoreList td {
+  padding: 10px 0;
+  border-bottom: 1px solid #00ffff;
+}
+
+#highScoreList tr:last-child td {
+  border-bottom: none;
+}
+
+.highlight-current-score {
+  background-color: rgba(255, 255, 0, 0.2);
+  font-weight: bold;
+}
+
 
 
