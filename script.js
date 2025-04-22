@@ -32,6 +32,18 @@ function showScreen(screen_id) {
 }
 
 
+// About Us dialog
+function openAbout() {
+    const dialog = document.getElementById("aboutDialog");
+    dialog.showModal();
+  }
+
+  function closeAbout() {
+    const dialog = document.getElementById("aboutDialog");
+    dialog.close(); 
+  }
+  
+
 let users_array = [{'b':'b'}, {'נ':'נ'}, {'p':'testuser'}]
 // Check the Register
 function registerUser(event){

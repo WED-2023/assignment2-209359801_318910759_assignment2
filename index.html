@@ -8,6 +8,29 @@
   <title>Space Shooter</title>
   <link rel="stylesheet" href="Style.css">
   <script defer src="script.js"></script>
+  <style>    
+    dialog {
+      border: none;
+      text-align: center;
+      border-radius: 20px;  
+      padding: 70px;
+      box-shadow: 10 10 10px rgba(0,0,0,0.3);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 100%;
+      width: 30px;
+      height: 35px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
   <link rel="preload" href="audio/menu_audio.mp3" as="audio">
   <link rel="preload" href="images/back_photo.png" as="image">
   <link rel="preload" href="images/logo_photo.png" as="image">
@@ -38,7 +61,7 @@
         <br><br>
         <button onclick="showScreen('register')">Sign up</button>
         <button onclick="showScreen('login')">Log in</button>
-        <button onclick="showScreen('aboutDialog')">About</button>
+        <button onclick="openAbout()">About</button>
       </div>
     </div>
   </header>
@@ -200,12 +223,14 @@
     </div>
 
 
-    <dialog id="aboutDialog" class="screen">
-      <h2>About Us</h2>
-      <p> The Creators: Yehonatan Segal and Omer Onn</p>
-      <p></p>
-      <button onclick="showScreen('welcome')" class="close-btn">X</button>
+    <dialog id="aboutDialog">
+      <button onclick="closeAbout()" class="close-btn">X</button>
+      <h2 class="center">About Us</h2>
+      <p>The Creators: Yehonatan Segal and Omer Onn</p>
     </dialog>
+
+
+
 
     
     <!-- Configuration Screen -->
@@ -280,14 +305,6 @@
     
     
   </main>
-
-  <div id="aboutModal" class="modal" style="display:none">
-    <div class="modal-content">
-      <span class="close" onclick="closeAbout()">&times;</span>
-      <h2>About</h2>
-      <p>Created by Yehonatan and Omer.</p>
-    </div>
-  </div>
 
 </body>
 </html>
