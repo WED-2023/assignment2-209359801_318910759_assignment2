@@ -882,6 +882,7 @@ function resetGame(){
     heroBullets = [];
     enemyBullets = [];
     enemySpeedIncreaseCounter = 0;
+    enemyBulletSpeed = canvas.height * 0.01;
     enemy_speed = 2;
     enemyStartX = 100;
     enemyStartY = 50;
