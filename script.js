@@ -438,16 +438,30 @@ const enemyShootSound = new Audio("audio/enemy_shoot.wav");
 
 // Addidng the Hero bullets to the Array
 function shootHeroBullet(){
-    if(!hero_Visible) return;
-    if(heroBullets.length === 0 || heroBullets[heroBullets.length-1].y < hero.y - 100) { 
+
+    if (!hero_Visible) return;
+
+    let bulletWidth = canvas.width * 0.02;
+    let bulletHeight = canvas.height * 0.06;
+
+    if (heroBullets.length === 0 || heroBullets[heroBullets.length - 1].y < hero.y - canvas.height * 0.1) {
         count_hero_shoot++;
         heroShootSound.currentTime = 0;
         heroShootSound.play();
-        heroBullets.push({x: hero.x + 50 - 25, y: hero.y, width: 50, height: 60, speed: 13});
-        
+
+        heroBullets.push({
+            x: hero.x + hero.width / 2 - bulletWidth / 2, // center of hero
+            y: hero.y - bulletHeight / 2, // start a bit higher than the top
+            width: bulletWidth,
+            height: bulletHeight,
+            speed: canvas.height * 0.01
+        });
     }
+    
 }
 
+
+/*
 // Addidng the Enemy bullets to the Array
 function shootEnemyBullet() {
     let shootingEnemies = [];
@@ -482,7 +496,47 @@ function shootEnemyBullet() {
         
     }
 }
+*/
 
+
+
+function shootEnemyBullet() {
+    let shootingEnemies = [];
+
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 5; col++) {
+            if (enemyImage[row][col] !== null) {
+                shootingEnemies.push({ row: row, col: col });
+            }
+        }
+    }
+
+    if (shootingEnemies.length > 0) {
+        let randomEnemy = shootingEnemies[Math.floor(Math.random() * shootingEnemies.length)];
+        let enemyX = enemyStartX + randomEnemy.col * (canvas.width / 6);
+        let enemyY = enemyStartY + randomEnemy.row * (canvas.height / 8);
+
+        enemyShootSound.currentTime = 0;
+        enemyShootSound.play();
+
+        let bulletWidth = canvas.width * 0.02;
+        let bulletHeight = bulletWidth * (enemyShootImage.height / enemyShootImage.width);
+        let dx = (Math.random() - 0.5) * 4;
+
+        enemyBullets.push({
+            x: enemyX + bulletWidth,
+            y: enemyY + bulletHeight,
+            dx: dx,
+            width: bulletWidth,
+            height: bulletHeight,
+            speed: enemyBulletSpeed
+
+        });
+    }
+}
+
+
+let enemyBulletSpeed = canvas.height * 0.01;
 
 
 // Incresing the enemy Speed
@@ -490,6 +544,8 @@ function increaseEnemySpeed(){
     if(enemySpeedIncreaseCounter < 4){
         enemy_speed *= 1.2;
         enemySpeedIncreaseCounter++;
+
+        enemyBulletSpeed *= 1.2;
     }
 }
 
@@ -526,7 +582,16 @@ function draw() {
 // Draw the hero
 function drawHero() {
     if(hero_Visible){
-        ctx.drawImage(heroImage, hero.x, hero.y, 100, 100);
+        let baseWidth = canvas.width * 0.045;
+        let heroWidth = baseWidth * 1.3;
+        let heroHeight = baseWidth * (heroImage.height / heroImage.width);
+
+        hero.width = heroWidth;
+        hero.height = heroHeight;
+
+        ctx.drawImage(heroImage, hero.x, hero.y, heroWidth, heroHeight);
+
+        //ctx.drawImage(heroImage, hero.x, hero.y, 100, 100);
     }
 }
    
@@ -539,7 +604,21 @@ function drawEnemys() {
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 5; j++) {
             if (enemyImage[i][j] !== null && enemyImage[i][j].complete) {
-                ctx.drawImage(enemyImage[i][j], enemyStartX + j * enemySpacingX, enemyStartY + i * enemySpacingY, 100, 100);
+                //ctx.drawImage(enemyImage[i][j], enemyStartX + j * enemySpacingX, enemyStartY + i * enemySpacingY, 100, 100);
+
+                let baseWidth = canvas.width * 0.045;
+                let enemyWidth = baseWidth * 1.3; 
+                let enemyHeight = baseWidth * (enemyImage[i][j].height / enemyImage[i][j].width);
+
+                ctx.drawImage(
+                    enemyImage[i][j],
+                    enemyStartX + j * enemySpacingX,
+                    enemyStartY + i * enemySpacingY,
+                    enemyWidth,
+                    enemyHeight
+                );
+
+
             }
         }
     }
@@ -575,13 +654,26 @@ function StartTimer(){
     }, 1000);
 }
 
-
+/*
 // Draw the hero bullets
 function drawHeroBullets(){
     heroBullets.forEach(bullet => {
         ctx.drawImage(shootImage, bullet.x, bullet.y, bullet.width, bullet.height);
     });
 }
+*/
+
+
+function drawHeroBullets(){
+    heroBullets.forEach(bullet => {
+        let bulletWidth = canvas.width * 0.02;
+        let bulletHeight = bulletWidth * (shootImage.height / shootImage.width);
+        ctx.drawImage(shootImage, bullet.x, bullet.y, bulletWidth, bulletHeight);
+    });
+}
+
+
+
 
 // Draw the enemy bullets
 function drawEnemyBullets(){
