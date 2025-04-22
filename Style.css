@@ -224,6 +224,7 @@ dialog {
   height: 90vh;
 }
 
+/*
 #infoBar {
   position: fixed;
   top: 10px;
@@ -239,6 +240,24 @@ dialog {
   z-index: 1000;
   text-align: center;
 }
+  */
+
+  #infoBar {
+    position: fixed;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10vw;
+    font-size: clamp(18px, 3vw, 35px);
+    color: rgb(0, 255, 221);
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    text-align: center;
+  }
+  
 
 
 #countdown {
