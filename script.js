@@ -142,6 +142,9 @@ let color = "";
 let GameOver = false;
 let highScores = [];
 let currentUser = null;
+let heroInvincible = false;
+let heroBlink = false;
+
 
 
 
@@ -387,7 +390,7 @@ function update(){
     for (let i = 0; i < enemyBullets.length; i++) {
         const bullet = enemyBullets[i];
 
-        if (hero_Visible && bullet.x < hero.x + 100 &&
+        if (hero_Visible && !heroInvincible && bullet.x < hero.x + 100 &&
             bullet.x + bullet.width > hero.x &&
             bullet.y < hero.y + 100 &&
             bullet.y + bullet.height > hero.y) {
@@ -419,6 +422,14 @@ function update(){
                     hero.x = canvas.width / 2 - 50;
                     hero.y = canvas.height * 0.8;
                     hero_Visible = true;
+
+                    heroInvincible = true;
+                    heroBlink = true;
+
+                    setTimeout(() => {
+                        heroInvincible = false;
+                    }, 2000); // 2 secound immune
+
                 }
             }, 3000);
 
@@ -601,6 +612,11 @@ function draw() {
 // Draw the hero
 function drawHero() {
     if(hero_Visible){
+
+        if(heroInvincible && Math.floor(Date.now() / 100) % 2 === 0){
+            return; // hero immune
+        }
+
         let baseWidth = canvas.width * 0.045;
         let heroWidth = baseWidth * 1.3;
         let heroHeight = baseWidth * (heroImage.height / heroImage.width);
@@ -680,15 +696,6 @@ function StartTimer(){
     }, 1000);
 }
 
-/*
-// Draw the hero bullets
-function drawHeroBullets(){
-    heroBullets.forEach(bullet => {
-        ctx.drawImage(shootImage, bullet.x, bullet.y, bullet.width, bullet.height);
-    });
-}
-*/
-
 
 function drawHeroBullets(){
     heroBullets.forEach(bullet => {
@@ -735,6 +742,12 @@ function startGame() {
     window.scrollTo(0, 0);
 
     hero = {x : (canvas.width / 2) - 50, y : canvas.height * 0.8, width : 50, height : 50, speed : 10};
+
+    heroInvincible = true;
+        setTimeout(() => {
+            heroInvincible = false;
+        }, 2000); // 2 secound immune
+
 
     // Every 5 Secound calls the function to increase enemy speed
     enemySpeedInterval = setInterval(increaseEnemySpeed, 3000);
