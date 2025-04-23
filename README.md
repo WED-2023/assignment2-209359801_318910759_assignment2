@@ -1,6 +1,6 @@
 # 🚀 Space Shooter Game
 
-Welcome to **Space Shooter**, a fully responsive web game where you're on a mission to protect the universe! Customize your spaceship, choose your shooting key, and blast your way through waves of enemies. Built as a final project in Web Development, this game combines JavaScript, HTML5 Canvas, and modern CSS techniques.
+Welcome to **Space Shooter**, a fully responsive web game where you're on a mission to protect the universe! Customize your spaceship, choose your shooting key, and blast your way through waves of enemies. Built as a project in Web Development, this game combines JavaScript, HTML5 Canvas, and modern CSS techniques.
 
 🌐 **Play now**: [Click here to play Space Shooter](https://wed-2023.github.io/assignment2-209359801_318910759_assignment2/)
 
