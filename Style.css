@@ -626,25 +626,6 @@ dialog {
 }
 
 
-/*
-#infoBar {
-  position: absolute;
-  top: 2vh;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15vw;
-  font-size: clamp(1.5vw, 3vw, 3.5vw);
-  color: rgb(0, 255, 221);
-  font-family: Arial, sans-serif;
-  z-index: 1000;
-  text-align: center;
-}
-
-*/
-
 #infoBar {
   position: fixed;
   top: 0;
@@ -692,7 +673,7 @@ dialog {
   align-items: center;
   justify-content: flex-start;
   padding-top: 0;
-  margin-top: 0;
+  transform: translateY(-10vh);
   box-sizing: border-box;
 }
 
