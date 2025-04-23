@@ -244,8 +244,8 @@ dialog {
 
 
 #infoBar {
-  position: fixed;
-  top: 2vh;
+  position: absolute;
+  top: 2%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
