@@ -529,7 +529,7 @@ function shootEnemyBullet() {
 */
 
 
-
+//  Addidng the Enemy bullets to the Array
 function shootEnemyBullet() {
     let shootingEnemies = [];
 
