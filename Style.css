@@ -26,6 +26,10 @@ body {
 }
 */
 
+
+
+
+/*
 html, body {
   margin: 0;
   padding: 0;
@@ -403,3 +407,401 @@ dialog {
 
 
 
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Arial', sans-serif;
+  background: url('images/back_photo.png') no-repeat center center fixed;
+  background-size: cover;
+  background-color: black;
+  color: white;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2vh 2vw;
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+  padding: 2vh 2vw;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+nav {
+  text-align: center;
+  margin: 3vh 0;
+}
+
+.image {
+  max-width: 20%;
+  height: auto;
+  border: 0.35vw solid white;
+  margin: 2vh 0;
+}
+
+button {
+  background-color: #222;
+  color: white;
+  border: 0.15vw solid #00ffff;
+  padding: 1vh 2vw;
+  font-size: 1.5vw;
+  margin: 1vh;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0.7vw;
+}
+
+button:hover {
+  background-color: #00ffff;
+  color: black;
+}
+
+#welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  border-radius: 1vw;
+  padding: 2vh 1vw;
+  margin: 0 1vw;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+#welcome h2 {
+  font-size: 4vw;
+  color: #00ffff;
+  text-shadow: 0 0 1vw #00ffff;
+  margin: 2vh 0;
+}
+
+#welcome a {
+  color: #ffcc00;
+  font-size: 1.5vw;
+  text-decoration: none;
+  margin: 2vh 0;
+  transition: 0.3s;
+}
+
+#welcome a:hover {
+  color: #ff6600;
+}
+
+#register, #login, #conf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2vh 1vw;
+  box-sizing: border-box;
+}
+
+#register form, #login form {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2vh 2vw;
+  border-radius: 1.5vw;
+  width: 90%;
+  max-width: 25vw;
+  box-sizing: border-box;
+}
+
+#register h2, #login h2, #conf h2 {
+  font-size: 3vw;
+  color: #00ffff;
+  text-shadow: 0 0 1vw #00ffff;
+  margin: 2vh 0;
+}
+
+#register input, #login input, #conf input {
+  padding: 1vh 1vw;
+  margin: 1vh 0;
+  border-radius: 0.7vw;
+  border: none;
+  outline: none;
+  font-size: 1.2vw;
+  width: 90%;
+  box-sizing: border-box;
+}
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1vw;
+  margin-top: 1vh;
+  flex-direction: row;
+}
+
+.select {
+  padding: 1vh 1vw;
+  margin: 1vh;
+  border-radius: 0.7vw;
+  border: none;
+  outline: none;
+  font-size: 1.2vw;
+  min-width: 5vw;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.year-select {
+  min-width: 7vw;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+dialog {
+  border-radius: 2vw;
+  padding: 2vh 2vw;
+  width: 50vw;
+  position: relative;
+}
+
+.close-btn {
+  background-color: white;
+  border: 0.2vw solid white;
+  position: absolute;
+  top: 1vh;
+  left: 1vh;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.5vw;
+  color: red;
+}
+
+.color-options {
+  display: flex;
+  gap: 1vw;
+}
+
+.color-option {
+  width: 15vw;
+  height: 15vw;
+  cursor: pointer;
+  border-radius: 0.5vw;
+  border: 0.2vw solid transparent;
+}
+
+.color-option:hover {
+  border: 0.2vw solid #333;
+}
+
+#gameCanvas {
+  display: block;
+  margin: 0 auto;
+  width: 80vw;
+  height: 90vh;
+}
+
+
+/*
+#infoBar {
+  position: absolute;
+  top: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15vw;
+  font-size: clamp(1.5vw, 3vw, 3.5vw);
+  color: rgb(0, 255, 221);
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+  text-align: center;
+}
+
+*/
+
+#infoBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 2.5vw;
+  color: rgb(0, 255, 221);
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+  background: transparent;
+  text-align: center;
+  padding: 0 2vw;
+  box-sizing: border-box;
+}
+
+
+
+
+#countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10vw;
+  color: yellow;
+  text-shadow: 0 0 1vw red;
+  display: none;
+  z-index: 1000;
+}
+
+#gameOverScreen h2 {
+  font-size: 4vw;
+  color: #00ffff;
+  text-shadow: 0 0 1vw #00ffff;
+  margin-bottom: 2vh;
+}
+
+#gameOverScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+#gameOverResults {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 0.15vw solid #00ffff;
+  border-radius: 1.5vw;
+  padding: 2vh 2vw;
+  width: 90%;
+  max-width: 25vw;
+  margin: 3vh auto;
+  text-align: left;
+  font-size: 1.5vw;
+  color: white;
+}
+
+#gameOverResults table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#gameOverResults td {
+  padding: 1vh 0;
+  border-bottom: 0.1vw solid #00ffff;
+}
+
+#gameOverResults td:first-child {
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+#gameOverScreen button {
+  margin-top: 2vh;
+  padding: 1vh 2vw;
+  font-size: 1.5vw;
+  border-radius: 0.7vw;
+  border: 0.15vw solid #00ffff;
+  background-color: #222;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#gameOverScreen button:hover {
+  background-color: #00ffff;
+  color: black;
+}
+
+#gameOverMessage {
+  margin-bottom: 2vh;
+  font-size: 3vw;
+  font-weight: bold;
+}
+
+.champion-message {
+  color: gold;
+  text-shadow: 0 0 1vw orange, 0 0 2vw gold;
+}
+
+.lost-message {
+  color: red;
+  text-shadow: 0 0 1vw darkred, 0 0 2vw red;
+}
+
+.better-message {
+  color: rgb(0, 47, 255);
+  text-shadow: 0 0 1vw yellow, 0 0 2vw orange;
+}
+
+#highScoreTable {
+  margin-top: 2vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 0.15vw solid #00ffff;
+  border-radius: 1.5vw;
+  padding: 2vh 2vw;
+  width: 90%;
+  max-width: 25vw;
+  text-align: center;
+  font-size: 1.5vw;
+  color: white;
+}
+
+#highScoreList {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#highScoreList th {
+  font-size: 1.7vw;
+  padding-bottom: 1vh;
+  color: #00ffff;
+}
+
+#highScoreList td {
+  padding: 1vh 0;
+  border-bottom: 0.1vw solid #00ffff;
+}
+
+#highScoreList tr:last-child td {
+  border-bottom: none;
+}
+
+.highlight-current-score {
+  background-color: rgba(255, 255, 0, 0.2);
+  font-weight: bold;
+}
+
+#conf {
+  transform: scale(0.80);
+  height: 130vh;
+  margin-top: -15vh;
+}
