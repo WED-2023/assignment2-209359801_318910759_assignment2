@@ -104,6 +104,8 @@ function setShootKey(event) {
     shoot = event.key;
 }
 
+
+
 function highlightSelected(selectedOption) {
     const colorOptions = document.querySelectorAll('.color-option');
     colorOptions.forEach(option => {
@@ -536,7 +538,7 @@ function shootEnemyBullet() {
         enemyShootSound.currentTime = 0;
         enemyShootSound.play();
 
-        let bulletWidth = canvas.width * 0.02;
+        let bulletWidth = canvas.width * 0.03;
         let bulletHeight = bulletWidth * (enemyShootImage.height / enemyShootImage.width);
         let dx = (Math.random() - 0.5) * 4;
 
@@ -622,10 +624,17 @@ function drawEnemys() {
         for (let j = 0; j < 5; j++) {
             if (enemyImage[i][j] !== null && enemyImage[i][j].complete) {
                 //ctx.drawImage(enemyImage[i][j], enemyStartX + j * enemySpacingX, enemyStartY + i * enemySpacingY, 100, 100);
-
+                
+                /*
                 let baseWidth = canvas.width * 0.045;
                 let enemyWidth = baseWidth * 1.3; 
                 let enemyHeight = baseWidth * (enemyImage[i][j].height / enemyImage[i][j].width);
+                */
+
+                let baseHeight = canvas.height * 0.08;
+                let enemyHeight = baseHeight;
+                let enemyWidth = baseHeight * (enemyImage[i][j].width / enemyImage[i][j].height);
+
 
                 ctx.drawImage(
                     enemyImage[i][j],
@@ -683,7 +692,7 @@ function drawHeroBullets(){
 
 function drawHeroBullets(){
     heroBullets.forEach(bullet => {
-        let bulletWidth = canvas.width * 0.02;
+        let bulletWidth = canvas.width * 0.03;
         let bulletHeight = bulletWidth * (shootImage.height / shootImage.width);
         ctx.drawImage(shootImage, bullet.x, bullet.y, bulletWidth, bulletHeight);
     });
