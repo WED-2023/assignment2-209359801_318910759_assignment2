@@ -251,7 +251,7 @@ dialog {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10vw;
+  gap: 200px;
   font-size: clamp(18px, 3vw, 35px);
   color: rgb(0, 255, 221);
   font-family: Arial, sans-serif;
