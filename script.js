@@ -238,10 +238,27 @@ function init_enemy_AirCraft_Images(){
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+/*
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
+    */
+
+
+function resizeCanvas() {
+    let aspectRatio = 3/2;
+    let windowRatio = window.innerWidth / window.innerHeight;
+
+    if(windowRatio > aspectRatio){
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerHeight * aspectRatio;
+    } else {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerWidth / aspectRatio;
+    }
+}
+
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
