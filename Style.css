@@ -530,7 +530,7 @@ button:hover {
   padding: 2vh 2vw;
   border-radius: 1.5vw;
   width: 90%;
-  max-width: 25vw;
+  max-width: 37vw;
   box-sizing: border-box;
 }
 
@@ -569,13 +569,13 @@ button:hover {
   border: none;
   outline: none;
   font-size: 1.2vw;
-  min-width: 5vw;
+  min-width: 3vw;
   box-sizing: border-box;
   text-align: center;
 }
 
 .year-select {
-  min-width: 7vw;
+  min-width: 3vw;
 }
 
 dialog::backdrop {
@@ -585,7 +585,7 @@ dialog::backdrop {
 dialog {
   border-radius: 2vw;
   padding: 2vh 2vw;
-  width: 50vw;
+  width: 37vw;
   position: relative;
 }
 

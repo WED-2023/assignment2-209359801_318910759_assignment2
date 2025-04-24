@@ -38,10 +38,27 @@ function openAbout() {
     dialog.showModal();
   }
 
-  function closeAbout() {
+function closeAbout() {
     const dialog = document.getElementById("aboutDialog");
     dialog.close(); 
-  }
+}
+
+const dialog = document.getElementById("aboutDialog");
+
+dialog.addEventListener("click", function (event) {
+    const rect = dialog.getBoundingClientRect();
+    const isInDialog = (
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom
+    );
+
+    if (!isInDialog) {
+        closeAbout();
+    }
+});
+
   
 
 let users_array = [{'b':'b'}, {'נ':'נ'}, {'p':'testuser'}]
