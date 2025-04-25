@@ -508,44 +508,6 @@ function shootHeroBullet(){
 }
 
 
-/*
-// Addidng the Enemy bullets to the Array
-function shootEnemyBullet() {
-    let shootingEnemies = [];
-
-    for (let row = 0; row < 4; row++) {
-        for (let col = 0; col < 5; col++) {
-            if (enemyImage[row][col] !== null) {
-                shootingEnemies.push({ row: row, col: col });
-            }
-        }
-    }
-
-    if (shootingEnemies.length > 0) {
-        let randomEnemy = shootingEnemies[Math.floor(Math.random() * shootingEnemies.length)];
-        let enemyX = enemyStartX + randomEnemy.col * (canvas.width / 6);
-        let enemyY = enemyStartY + randomEnemy.row * (canvas.height / 8);
-        
-        enemyShootSound.currentTime = 0;
-        enemyShootSound.play();
-
-        let dx = (Math.random() - 0.5) * 4;
-
-        enemyBullets.push({
-            x: enemyX + 50 - 15,  // Center the bullet relative to enemy
-            y: enemyY + 100,
-            dx: dx,  // for diagnol shooting
-            width: 50,  
-            height: 60,     
-            speed: 5      
-        });
-        
-        
-    }
-}
-*/
-
-
 //  Addidng the Enemy bullets to the Array
 function shootEnemyBullet() {
     let shootingEnemies = [];
