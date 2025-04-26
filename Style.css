@@ -140,6 +140,15 @@ button:hover {
   flex-direction: row;
 }
 
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .select {
   padding: 1vh 1vw;
   margin: 1vh;
