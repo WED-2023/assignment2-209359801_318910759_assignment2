@@ -109,6 +109,8 @@ function registerUser(event){
     }
 }
 
+
+// set the shoot key from the user input
 function setShootKey(event) {
 
     if (event.key === " ") { 
@@ -122,7 +124,7 @@ function setShootKey(event) {
 }
 
 
-
+// highlight the selected air craft
 function highlightSelected(selectedOption) {
     const colorOptions = document.querySelectorAll('.color-option');
     colorOptions.forEach(option => {
@@ -131,6 +133,8 @@ function highlightSelected(selectedOption) {
     selectedOption.style.border = "3px solid yellow";
 }
 
+
+// init the cinfiguration screen
 function initConfiguration() {
     const shootInput = document.getElementById('shoot');
     const colorOptions = document.querySelectorAll('.color-option');
@@ -711,6 +715,8 @@ function drawBackground() {
 }
 
 let enemySpeedInterval;
+
+
 // Start the Game
 function startGame() {
     const menuMusic = document.getElementById('menu-music');
@@ -836,7 +842,7 @@ function showGameOverScreen(message) {
 }
 
 
-
+// Show hige score table
 function renderHighScores() {
     const table = document.getElementById('highScoreList');
     table.innerHTML = '';
@@ -855,6 +861,8 @@ function renderHighScores() {
     });
 }
 
+
+// Create the row od the high score
 function createScoreRow(data, isHeader = false, highlight = false) {
     const row = document.createElement('tr');
     data.forEach(cellText => {
